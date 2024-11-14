@@ -9,10 +9,12 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class ReissueService {
@@ -28,14 +30,17 @@ public class ReissueService {
 
         String refresh = null;
         Cookie[] cookies = request.getCookies();
-        for (Cookie cookie : cookies) {
 
-            if (cookie.getName().equals("refresh")) {
-                refresh = cookie.getValue();
+        if (cookies != null)
+            for (Cookie cookie : cookies) {
+
+                if (cookie.getName().equals("refresh")) {
+                    refresh = cookie.getValue();
+                    log.info("토큰 재발급 요청의 refreshToken : {}", refresh);
+                }
             }
-        }
 
-        if (refresh == null) {
+        if (refresh == null || refresh.isEmpty()) {
 
             throw new CustomException(ErrorCode.MISSING_AUTHORIZATION_REFRESH_TOKEN);
         }
@@ -55,6 +60,8 @@ public class ReissueService {
         }
 
         String userEmail = jwtUtil.getUsername(refresh);
+        log.info("refreshToken의 userEmail : {}", userEmail);
+
         //Redis에 저장된 refresh 토큰 확인
         if (!redisRefreshTokenService.existsByRefreshToken(userEmail)) {
 
@@ -73,6 +80,7 @@ public class ReissueService {
         return ResponseEntity.ok().body(SuccessResponse.successWithNoData("refresh 토큰 재발급 성공"));
     }
 
+<<<<<<< Updated upstream
     private Cookie createCookie(String key, String value) {
 
         Cookie cookie = new Cookie(key, value);
@@ -82,6 +90,18 @@ public class ReissueService {
         cookie.setHttpOnly(true);
 
         return cookie;
+=======
+    private void setResponseCookie(HttpServletResponse response, String key, String value) {
+
+        ResponseCookie cookie = ResponseCookie.from(key, value)
+                .maxAge(24 * 60 * 60)
+                .sameSite("None")
+                .secure(true)
+                .httpOnly(true)
+                .path("/")
+                .build();
+        response.addHeader(HttpHeaders.SET_COOKIE, cookie.toString());
+>>>>>>> Stashed changes
     }
 
 }

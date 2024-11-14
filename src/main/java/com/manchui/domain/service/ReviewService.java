@@ -3,6 +3,7 @@ package com.manchui.domain.service;
 import com.manchui.domain.dto.review.ReviewCreateRequest;
 import com.manchui.domain.dto.review.ReviewCreateResponse;
 import com.manchui.domain.dto.review.ReviewDetailPagingResponse;
+import com.manchui.domain.dto.review.ReviewScoreResponse;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,8 @@ public interface ReviewService {
 
     void deleteReview(String email, Long reviewId);
 
-    ReviewDetailPagingResponse searchReview(Pageable pageable, String query, String location, String startDate, String endDate, String category, String sort, int score);
+    ReviewDetailPagingResponse searchReview(Pageable pageable, String query, String location, String startDate, String endDate, String category, String sort, Integer score);
+
+    ReviewScoreResponse getReviewScore();
 
 }

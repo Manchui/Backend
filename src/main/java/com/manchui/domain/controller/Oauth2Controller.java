@@ -2,6 +2,7 @@ package com.manchui.domain.controller;
 
 import com.manchui.domain.service.Oauth2Service;
 import com.manchui.global.response.SuccessResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
+@Tag(name = "Oauth2")
 @RestController
 @RequestMapping("/login/oauth2/callback")
 @RequiredArgsConstructor
@@ -29,6 +30,7 @@ public class Oauth2Controller {
 
     @GetMapping("/google")
     public ResponseEntity<SuccessResponse<Void>> googleLogin(HttpServletRequest request) {
+
         String code = request.getParameter("code");
         String googleAccessToken = oauth2Service.getGoogleAccessToken(code);
         return oauth2Service.googleLogin(googleAccessToken);
@@ -36,8 +38,10 @@ public class Oauth2Controller {
 
     @GetMapping("/naver")
     public ResponseEntity<SuccessResponse<Void>> naverLogin(HttpServletRequest request) {
+
         String code = request.getParameter("code");
         String naverAccessToken = oauth2Service.getNaverAccessToken(code);
         return oauth2Service.naverLogin(naverAccessToken);
     }
+
 }

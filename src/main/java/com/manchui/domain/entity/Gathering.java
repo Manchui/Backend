@@ -57,12 +57,14 @@ public class Gathering extends Timestamped {
     @Min(2)
     @Max(100)
     @Comment("모집 정원")
+    @Builder.Default
     private int maxUsers = 20;
 
     @Column(name = "min_users")
     @Min(2)
     @Max(100)
     @Comment("모집 최소 인원")
+    @Builder.Default
     private int minUsers = 2;
 
     @Column(name = "is_opened")
