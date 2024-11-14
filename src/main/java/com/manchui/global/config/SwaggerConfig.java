@@ -3,6 +3,7 @@ package com.manchui.global.config;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.tags.Tag;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -14,9 +15,6 @@ public class SwaggerConfig {
 
         return new OpenAPI()
                 .components(new Components())
-<<<<<<< Updated upstream
-                .info(apiInfo());
-=======
                 .info(apiInfo())
                 .addTagsItem(new Tag().name("Join").description("회원가입 관련 API"))
                 .addTagsItem(new Tag().name("Users").description("사용자 관련 API"))
@@ -26,7 +24,6 @@ public class SwaggerConfig {
                 .addTagsItem(new Tag().name("Token").description("토큰 관련 API"))
                 .addTagsItem(new Tag().name("Notification"))
                 .addTagsItem(new Tag().name("SSE"));
->>>>>>> Stashed changes
     }
 
     private Info apiInfo() {
@@ -36,4 +33,5 @@ public class SwaggerConfig {
                 .description("만 명이 즐기는 취미(만취)의 API 서버입니다.")
                 .version("1.0");
     }
+
 }

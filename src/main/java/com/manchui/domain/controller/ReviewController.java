@@ -7,14 +7,11 @@ import com.manchui.domain.dto.review.ReviewDetailPagingResponse;
 import com.manchui.domain.dto.review.ReviewScoreResponse;
 import com.manchui.domain.service.ReviewService;
 import com.manchui.global.response.SuccessResponse;
-<<<<<<< Updated upstream
-=======
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
->>>>>>> Stashed changes
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
@@ -24,6 +21,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+@Tag(name = "Reviews")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/reviews")
