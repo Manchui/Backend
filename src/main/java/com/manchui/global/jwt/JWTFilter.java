@@ -45,7 +45,9 @@ public class JWTFilter extends OncePerRequestFilter {
                 (requestUri.matches("^/login/oauth2/callback/naver$")) ||
                 (requestUri.matches("^/swagger-ui(/.*)?$")) ||
                 (requestUri.matches("^/swagger-ui.html$")) ||
-                (requestUri.matches("^/v3/api-docs(?:/.*)?$"))) {
+                (requestUri.matches("^/v3/api-docs(?:/.*)?$")) ||
+
+                (requestUri.matches("^\\/api\\/auths\\/reissue$") && requestMethod.equals("POST"))) {
 
             filterChain.doFilter(request, response);
             return;
