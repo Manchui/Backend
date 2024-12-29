@@ -2,6 +2,7 @@ package com.manchui.domain.service;
 
 import com.manchui.domain.dto.gathering.GatheringCreateRequest;
 import com.manchui.domain.entity.Attendance;
+import com.manchui.domain.entity.ChatRoom;
 import com.manchui.domain.entity.Gathering;
 import com.manchui.domain.entity.User;
 import com.manchui.domain.repository.AttendanceRepository;
@@ -22,9 +23,9 @@ public class GatheringStoreImpl implements GatheringStore {
 
     @Override
     @Transactional
-    public Gathering saveGathering(GatheringCreateRequest createRequest, User user, LocalDateTime gatheringDate, LocalDateTime dueDate) {
+    public Gathering saveGathering(GatheringCreateRequest createRequest, User user, LocalDateTime gatheringDate, LocalDateTime dueDate, ChatRoom chatRoom) {
 
-        return gatheringRepository.save(createRequest.toRegisterEntity(user, gatheringDate, dueDate));
+        return gatheringRepository.save(createRequest.toRegisterEntity(user, gatheringDate, dueDate, chatRoom));
     }
 
     @Override
