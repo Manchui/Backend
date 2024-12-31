@@ -114,7 +114,8 @@ public class SecurityConfig {
                                 "/login/oauth2/callback/kakao",
                                 "/login/oauth2/callback/google",
                                 "/login/oauth2/callback/naver"
-                        ).permitAll()
+                                ).permitAll()
+
                         .anyRequest().authenticated()
                 );
         //로그인 필터 적용
@@ -130,6 +131,7 @@ public class SecurityConfig {
         //커스텀 로그아웃 필터 적용
         http
                 .addFilterBefore(new CustomLogoutFilter(jwtUtil, redisRefreshTokenService, emitterRepository), LogoutFilter.class);
+
 
         //세션 설정
         http

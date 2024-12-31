@@ -18,6 +18,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;
 import org.springframework.web.filter.GenericFilterBean;
 
@@ -77,14 +78,8 @@ public class CustomLogoutFilter extends GenericFilterBean {
         emitterRepository.deleteAllEventCacheStartWithEmail(email);
         log.info("사용자 {}의 Emitter와 Event Cache가 삭제되었습니다.", email);
 
-        ResponseCookie cookie = ResponseCookie.from("refresh", null)
-                .httpOnly(true)
-                .secure(true)
-                .maxAge(0)
-                .path("/")
-                .sameSite("None") // SameSite 속성 설정
-                .build();
-        response.addHeader("Set-Cookie", cookie.toString());
+        //Refresh 토큰 쿠키 만료
+        setResponseCookie(response, "refresh", null);
 
         response.setStatus(HttpServletResponse.SC_OK);
         response.setContentType("application/json");
@@ -97,6 +92,17 @@ public class CustomLogoutFilter extends GenericFilterBean {
                         "}";
 
         response.getWriter().write(jsonResponse);
+    }
+
+    private void setResponseCookie(HttpServletResponse response, String key, String value) {
+        ResponseCookie cookie = ResponseCookie.from(key, value)
+                .maxAge(0)
+                .sameSite("None")
+                .secure(true)
+                .httpOnly(true)
+                .path("/")
+                .build();
+        response.addHeader(HttpHeaders.SET_COOKIE, cookie.toString());
     }
 
     private void validateRefreshToken(HttpServletRequest request, HttpServletResponse response, String refresh) {

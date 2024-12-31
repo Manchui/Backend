@@ -156,6 +156,7 @@ public class GatheringServiceImpl implements GatheringService {
         return response;
     }
 
+
     /**
      * 2. 모임 참여
      * 작성자: 오예령
