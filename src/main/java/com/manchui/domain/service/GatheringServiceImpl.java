@@ -20,6 +20,7 @@ import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import static com.manchui.global.exception.ErrorCode.*;
 
@@ -47,6 +48,8 @@ public class GatheringServiceImpl implements GatheringService {
     private final HeartRepository heartRepository;
 
     private final ReviewRepository reviewRepository;
+
+    private final ChatRoomRepository chatRoomRepository;
 
     /**
      * 0. 모임 생성
@@ -107,7 +110,9 @@ public class GatheringServiceImpl implements GatheringService {
 
         } else {
             // 2. 모임 및 이미지 객체 저장
-            Gathering gathering = gatheringStore.saveGathering(createRequest, user, gatheringDate, dueDate);
+            ChatRoom chatRoom = new ChatRoom(UUID.randomUUID().toString());
+            chatRoomRepository.save(chatRoom);
+            Gathering gathering = gatheringStore.saveGathering(createRequest, user, gatheringDate, dueDate, chatRoom);
             imageService.uploadGatheringImage(createRequest.getGatheringImage(), gathering.getId(), false);
 
             // 3. 주최자를 모임에 자동으로 참여시킴

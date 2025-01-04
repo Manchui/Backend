@@ -1,5 +1,6 @@
 package com.manchui.domain.dto.gathering;
 
+import com.manchui.domain.entity.ChatRoom;
 import com.manchui.domain.entity.Gathering;
 import com.manchui.domain.entity.User;
 import jakarta.validation.constraints.*;
@@ -43,7 +44,7 @@ public class GatheringCreateRequest {
     @Size(min = 10, max = 1000, message = "모임 내용은 10자 이상 1000자 이하로 입력해주세요.")
     private String gatheringContent;
 
-    public Gathering toRegisterEntity(User user, LocalDateTime gatheringDate, LocalDateTime dueDate) {
+    public Gathering toRegisterEntity(User user, LocalDateTime gatheringDate, LocalDateTime dueDate, ChatRoom chatRoom) {
 
         return Gathering.builder()
                 .user(user)
@@ -58,6 +59,7 @@ public class GatheringCreateRequest {
                 .isOpened(false)
                 .isCanceled(false)
                 .isClosed(false)
+                .chatRoom(chatRoom)
                 .build();
     }
 

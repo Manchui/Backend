@@ -86,6 +86,10 @@ public class Gathering extends Timestamped {
     @Comment("회원 id")
     private User user;
 
+    @OneToOne
+    @JoinColumn(name = "chatroom_id")
+    private ChatRoom chatRoom;
+
     public GatheringCreateResponse toResponseDto(String filePath) {
 
         return GatheringCreateResponse.builder()
@@ -104,6 +108,7 @@ public class Gathering extends Timestamped {
                 .isOpened(isOpened)
                 .isCanceled(isCanceled)
                 .isClosed(isClosed)
+                .chatRoomId(chatRoom.getRoomId())
                 .build();
 
     }

@@ -13,6 +13,13 @@ services:
       DB_USER: ${DB_USER}
       DB_PASSWORD: ${DB_PASSWORD}
 
+      MONGODB_HOST: ${MONGODB_HOST}
+      MONGODB_PORT: ${MONGODB_PORT}
+      MONGODB_USERNAME: ${MONGODB_USERNAME}
+      MONGODB_PASSWORD: ${MONGODB_PASSWORD}
+      MONGODB_DATABASE: ${MONGODB_DATABASE}
+      MONGODB_AUTH_DB: ${MONGODB_AUTH_DB}
+
       # 파일 업로드 제한
       MAX_FILE_SIZE: ${MAX_FILE_SIZE}
       MAX_REQUEST_SIZE: ${MAX_REQUEST_SIZE}
@@ -45,6 +52,13 @@ services:
 
       #Oauth2 redirect_uri 설정
       PROD_REDIRECT_URI: ${PROD_REDIRECT_URI}
+
+      # Rabbitmq 설정
+      RABBITMQ_USERNAME: ${RABBITMQ_USERNAME}
+      RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD}
+      RABBITMQ_HOST: ${RABBITMQ_HOST}
+      RABBITMQ_PORT: ${RABBITMQ_PORT}
+      RABBITMQ_VH: ${RABBITMQ_VH}
 
       # 시간대 설정
       TZ: Asia/Seoul
@@ -67,6 +81,13 @@ services:
       DB_USER: ${DB_USER}
       DB_PASSWORD: ${DB_PASSWORD}
 
+      MONGODB_HOST: ${MONGODB_HOST}
+      MONGODB_PORT: ${MONGODB_PORT}
+      MONGODB_USERNAME: ${MONGODB_USERNAME}
+      MONGODB_PASSWORD: ${MONGODB_PASSWORD}
+      MONGODB_DATABASE: ${MONGODB_DATABASE}
+      MONGODB_AUTH_DB: ${MONGODB_AUTH_DB}
+
       # 파일 업로드 제한
       MAX_FILE_SIZE: ${MAX_FILE_SIZE}
       MAX_REQUEST_SIZE: ${MAX_REQUEST_SIZE}
@@ -100,6 +121,19 @@ services:
       #Oauth2 redirect_uri 설정
       PROD_REDIRECT_URI: ${PROD_REDIRECT_URI}
 
+      # Rabbitmq 설정
+      RABBITMQ_USERNAME: ${RABBITMQ_USERNAME}
+      RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD}
+      RABBITMQ_HOST: ${RABBITMQ_HOST}
+      RABBITMQ_PORT: ${RABBITMQ_PORT}
+      RABBITMQ_VH: ${RABBITMQ_VH}
+
+      RELAY_HOST: ${RELAY_HOST}
+      RELAY_VIRTUAL_HOST: ${RELAY_VIRTUAL_HOST}
+      RELAY_PORT: ${RELAY_PORT}
+      RELAY_SYSTEM_LOGIN: ${RELAY_SYSTEM_LOGIN}
+      RELAY_SYSTEM_PASSCODE: ${RELAY_SYSTEM_PASSCODE}
+
       # 시간대 설정
       TZ: Asia/Seoul
     depends_on:
@@ -115,9 +149,6 @@ services:
     ports:
       - "80:80"
       - "443:443"
-    depends_on:
-      - blue
-      - green
     volumes:
       - /etc/letsencrypt:/etc/letsencrypt  # SSL 인증서 마운트
       - ./Nginx/config:/etc/nginx/conf.d   # nginx.conf 파일 마운트

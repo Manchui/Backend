@@ -1,5 +1,6 @@
 package com.manchui.domain.dto.gathering;
 
+import com.manchui.domain.entity.ChatRoom;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -47,4 +48,5 @@ public class GatheringCreateResponse {
 
     private boolean isHearted;
 
+    private String chatRoomId;
 }
