@@ -116,7 +116,7 @@ public class ReviewQueryDslImpl implements ReviewQueryDsl {
 
     // 전체 후기 조회 시 점수 통계 가져오는 메서드
     @Override
-    public ReviewScoreInfo getScoreStatistics(String query, String location, String category, String startDate, String endDate, int score) {
+    public ReviewScoreInfo getScoreStatistics(String query, String location, String category, String startDate, String endDate, Integer score) {
 
         BooleanBuilder builder = new BooleanBuilder();
 
@@ -187,7 +187,7 @@ public class ReviewQueryDslImpl implements ReviewQueryDsl {
     }
 
     @Override
-    public Page<ReviewDetailInfo> getReviewDetailInfo(Pageable pageable, String query, String location, String startDate, String endDate, String category, String sort, int score) {
+    public Page<ReviewDetailInfo> getReviewDetailInfo(Pageable pageable, String query, String location, String startDate, String endDate, String category, String sort, Integer score) {
 
         JPAQuery<ReviewDetailInfo> queryBuilder = queryFactory
                 .select(
@@ -231,7 +231,7 @@ public class ReviewQueryDslImpl implements ReviewQueryDsl {
                         .from(review)
                         .leftJoin(review.gathering, gathering)
                         .leftJoin(review.user, user)
-                        .where(applyFiltersForTotalCount(query, location, startDate, endDate, category)) // 필터를 적용한 메서드 호출
+                        .where(applyFiltersForTotalCount(query, location, startDate, endDate, category, -1)) // 필터를 적용한 메서드 호출
                         .fetchOne()
         ).orElse(0L);
 
@@ -239,8 +239,60 @@ public class ReviewQueryDslImpl implements ReviewQueryDsl {
 
     }
 
+    @Override
+    public long getScoreReviewCount(String query, String location, String startDate, String endDate, String category, int score) {
+
+        return Optional.ofNullable(
+                queryFactory
+                        .select(review.count())
+                        .from(review)
+                        .leftJoin(review.gathering, gathering)
+                        .leftJoin(review.user, user)
+                        .where(applyFiltersForTotalCount(query, location, startDate, endDate, category, score)) // 필터를 적용한 메서드 호출
+                        .fetchOne()
+        ).orElse(0L);
+    }
+
+    @Override
+    public long getScoreReviewCountWithoutFilter() {
+
+        return Optional.ofNullable(
+                queryFactory
+                        .select(review.count())
+                        .from(review)
+                        .leftJoin(review.gathering, gathering)
+                        .leftJoin(review.user, user)
+                        .fetchOne()
+        ).orElse(0L);
+
+    }
+
+    @Override
+    public ReviewScoreInfo getScoreStatisticsWithoutFilter() {
+
+        BooleanBuilder builder = new BooleanBuilder();
+
+        // 평균 점수 계산
+        Double avgScore = queryFactory
+                .select(review.score.avg())
+                .from(review)
+                .fetchOne();
+
+        double averageScore = Optional.ofNullable(avgScore).orElse(0.0);
+        log.info("후기 목록 조회 시 계산된 필터링 적용 안된 평균 점수 : {}", averageScore);
+
+        // 각 점수별 카운트 계산
+        long fiveScoreCount = countScore(builder, 5);
+        long fourScoreCount = countScore(builder, 4);
+        long threeScoreCount = countScore(builder, 3);
+        long twoScoreCount = countScore(builder, 2);
+        long oneScoreCount = countScore(builder, 1);
+
+        return new ReviewScoreInfo(averageScore, fiveScoreCount, fourScoreCount, threeScoreCount, twoScoreCount, oneScoreCount);
+    }
+
     // 필터링된 총 개수를 위한 메서드
-    private BooleanBuilder applyFiltersForTotalCount(String query, String location, String startDate, String endDate, String category) {
+    private BooleanBuilder applyFiltersForTotalCount(String query, String location, String startDate, String endDate, String category, Integer score) {
 
         BooleanBuilder builder = new BooleanBuilder();
 
@@ -261,6 +313,10 @@ public class ReviewQueryDslImpl implements ReviewQueryDsl {
 
         if (category != null && !category.isEmpty()) {
             builder.and(gathering.category.eq(category));
+        }
+
+        if (score != -1) {
+            builder.and(review.score.eq(score));
         }
 
         return builder;

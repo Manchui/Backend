@@ -12,6 +12,8 @@ public class ReviewDetailPagingResponse {
 
     private int reviewCount;
 
+    private long scoreReviewCount;
+
     private ReviewScoreInfo scoreList;
 
     private List<?> reviewContentList;
@@ -22,9 +24,10 @@ public class ReviewDetailPagingResponse {
 
     private int totalPage;
 
-    public ReviewDetailPagingResponse(Page<?> pageList, ReviewScoreInfo scoreInfo) {
+    public ReviewDetailPagingResponse(Page<?> pageList, ReviewScoreInfo scoreInfo, long scoreReviewCount) {
 
         this.reviewCount = (int) pageList.getTotalElements();
+        this.scoreReviewCount = scoreReviewCount;
         this.scoreList = scoreInfo;
         this.reviewContentList = pageList.getContent();
         this.pageSize = pageList.getSize();

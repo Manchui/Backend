@@ -2,6 +2,7 @@ package com.manchui.global.exception.handler;
 
 import com.manchui.global.exception.CustomException;
 import com.manchui.global.exception.ErrorCode;
+import com.manchui.global.exception.InvalidRequestException;
 import com.manchui.global.response.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -98,6 +99,18 @@ public class GlobalExceptionHandler {
     protected ResponseEntity<ErrorResponse> handleDateTimeParseException(DateTimeParseException ex) {
 
         log.error("handleDateTimeParseException", ex);
+
+        ErrorResponse response = ErrorResponse.create()
+                .message(ex.getMessage())
+                .httpStatus(HttpStatus.BAD_REQUEST);
+
+        return ResponseEntity.badRequest().body(response);
+    }
+
+    @ExceptionHandler(value = {InvalidRequestException.class})
+    protected ResponseEntity<ErrorResponse> handleInvalidRequestException(InvalidRequestException ex) {
+
+        log.error("handleInvalidRequestException : {}", ex.getMessage());
 
         ErrorResponse response = ErrorResponse.create()
                 .message(ex.getMessage())

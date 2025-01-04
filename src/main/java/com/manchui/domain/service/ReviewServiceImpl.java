@@ -129,13 +129,25 @@ public class ReviewServiceImpl implements ReviewService {
      * @return 요청한 범위 내에 속하는 페이징 처리된 후기 리스트 반환
      */
     @Override
-    public ReviewDetailPagingResponse searchReview(Pageable pageable, String query, String location, String startDate, String endDate, String category, String sort, int score) {
+    public ReviewDetailPagingResponse searchReview(Pageable pageable, String query, String location, String startDate, String endDate, String category, String sort, Integer score) {
 
         // 전체 후기의 평균 평점 및 각 평점 별 후기 개수 계산 메서드
         ReviewScoreInfo scoreInfo = reviewRepository.getScoreStatistics(query, location, category, startDate, endDate, score);
         Page<ReviewDetailInfo> reviewDetailInfoList = reviewRepository.getReviewDetailInfo(pageable, query, location, startDate, endDate, category, sort, score);
 
-        return new ReviewDetailPagingResponse(reviewDetailInfoList, scoreInfo);
+        long scoreReviewCount = reviewRepository.getScoreReviewCount(query, location, startDate, endDate, category, score);
+
+        return new ReviewDetailPagingResponse(reviewDetailInfoList, scoreInfo, scoreReviewCount);
+    }
+
+    @Override
+    public ReviewScoreResponse getReviewScore() {
+
+        long scoreReviewCount = reviewRepository.getScoreReviewCountWithoutFilter();
+
+        ReviewScoreInfo scoreInfo = reviewRepository.getScoreStatisticsWithoutFilter();
+
+        return new ReviewScoreResponse(scoreReviewCount, scoreInfo);
     }
 
     private Review validateUserAndReview(String email, Long reviewId) {

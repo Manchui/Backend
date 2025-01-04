@@ -48,7 +48,7 @@ public enum ErrorCode {
     ALREADY_JOIN_GATHERING(HttpStatus.BAD_REQUEST, "이미 참여 신청된 모임입니다."),
     ALREADY_HEART_GATHERING(HttpStatus.BAD_REQUEST, "이미 좋아요를 누른 모임입니다."),
     HEART_NOT_EXIST(HttpStatus.NOT_FOUND, "좋아요를 누르지 않은 모임입니다."),
-    ATTENDANCE_NOT_EXIST(HttpStatus.NOT_FOUND, "참여한 모임만 취소/후기 등록이 가능합니다."),
+    ATTENDANCE_NOT_EXIST(HttpStatus.NOT_FOUND, "참여 내역이 존재하지 않습니다."),
     UNAUTHORIZED_GATHERING_CANCEL(HttpStatus.BAD_REQUEST, "본인이 생성한 모임만 취소 가능합니다."),
     GATHERING_FULL(HttpStatus.BAD_REQUEST, "모집 정원이 다 찬 경우에는 참여할 수 없습니다."),
     MUST_JOIN_IN(HttpStatus.BAD_REQUEST, "모임 주최자는 필수 참석입니다"),
@@ -57,7 +57,7 @@ public enum ErrorCode {
     ILLEGAL_GATHERING_STATUS(HttpStatus.BAD_REQUEST, "현재 마감된 모임이 아닙니다."),
     ALREADY_REVIEW_EXIST(HttpStatus.BAD_REQUEST, "참여한 모임에 대한 후기는 1회만 등록 가능합니다."),
     REVIEW_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 후기입니다."),
-    PERMISSION_DENIED(HttpStatus.BAD_REQUEST, "본인이 작성한 모임/후기만 관리 가능합니다."),
+    PERMISSION_DENIED(HttpStatus.FORBIDDEN, "본인이 작성한 모임 및 후기만 관리 가능합니다."),
 
     // image
     ILLEGAL_EMPTY_FILE(HttpStatus.BAD_REQUEST, "이미지 파일은 필수 입력 값입니다."),
@@ -66,6 +66,13 @@ public enum ErrorCode {
     IMAGE_NOT_FOUND(HttpStatus.NOT_FOUND, "이미지를 찾을수 없습니다."),
     ILLEGAL_IMAGE_URL(HttpStatus.BAD_REQUEST, "이미지 URL이 유효하지 않습니다."),
     IMAGE_UPLOAD_FAILED(HttpStatus.BAD_REQUEST, "이미지를 업로드하는 데 실패했습니다. 유효한 URL인지 확인해주세요."),
+
+    // notification
+    NOTIFICATION_NOT_FOUND(HttpStatus.NOT_FOUND, "해당 알림을 찾을 수 없습니다."),
+    NOTIFICATION_ALREADY_READ(HttpStatus.BAD_REQUEST, "이미 읽은 알림입니다."),
+    NOTIFICATION_ACCESS_DENIED(HttpStatus.FORBIDDEN, "해당 알림에 접근할 수 없습니다."),
+    NOTIFICATION_ALREADY_DELETED(HttpStatus.BAD_REQUEST, "이미 삭제된 알림입니다."),
+    NOTIFICATION_CANNOT_BE_DELETED(HttpStatus.BAD_REQUEST, "삭제할 수 없는 알림입니다.?"),
 
     // chat
     CHATROOM_NOT_FOUND(HttpStatus.BAD_REQUEST, "존재하지 않는 채팅방 입니다.");
