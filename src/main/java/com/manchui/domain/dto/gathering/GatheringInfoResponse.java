@@ -59,7 +59,9 @@ public class GatheringInfoResponse {
 
     private ReviewDetailPagingResponse reviewsList;
 
-    public GatheringInfoResponse(Gathering gathering, String filePath, int currentUsers, int heartCounts, boolean isHearted, List<UserInfo> userInfoList, ReviewDetailPagingResponse reviewsList) {
+    private String roomId;
+
+    public GatheringInfoResponse(Gathering gathering, String filePath, int currentUsers, int heartCounts, boolean isHearted, List<UserInfo> userInfoList, ReviewDetailPagingResponse reviewsList, String roomId) {
 
         this.gatheringId = gathering.getId();
         this.name = gathering.getUser().getName();
@@ -84,6 +86,7 @@ public class GatheringInfoResponse {
         this.isHearted = isHearted;
         this.usersList = userInfoList;
         this.reviewsList = reviewsList;
+        this.roomId = roomId;
     }
 
 }

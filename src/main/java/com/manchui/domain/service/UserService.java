@@ -234,4 +234,12 @@ public class UserService {
 
         return new UserReviewableGatheringsResponse(map.getNumberOfElements(), map, map.getSize(), map.getNumber() + 1, map.getTotalPages());
     }
+
+    // 사용자 계정 탈퇴
+    @Transactional
+    public void deleteUser(CustomUserDetails userDetails) {
+        String userEmail = userDetails.getUsername();
+        User user = userRepository.findByEmail(userEmail);
+        user.softDelete();
+    }
 }

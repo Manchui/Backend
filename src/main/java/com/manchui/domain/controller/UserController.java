@@ -50,6 +50,13 @@ public class UserController {
         return ResponseEntity.ok().body(SuccessResponse.successWithData(response));
     }
 
+    @DeleteMapping("/api/auth/user")
+    public ResponseEntity<SuccessResponse<String>> deleteUser(@AuthenticationPrincipal CustomUserDetails userDetails) {
+
+        userService.deleteUser(userDetails);
+        return ResponseEntity.ok().body(SuccessResponse.successWithNoData("회원 탈퇴 성공"));
+    }
+
     @GetMapping("/api/users/gatherings")
     public ResponseEntity<SuccessResponse<UserWrittenGatheringsResponse>> getMyGatheringList(
             @AuthenticationPrincipal CustomUserDetails userDetails,

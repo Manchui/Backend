@@ -72,7 +72,10 @@ public enum ErrorCode {
     NOTIFICATION_ALREADY_READ(HttpStatus.BAD_REQUEST, "이미 읽은 알림입니다."),
     NOTIFICATION_ACCESS_DENIED(HttpStatus.FORBIDDEN, "해당 알림에 접근할 수 없습니다."),
     NOTIFICATION_ALREADY_DELETED(HttpStatus.BAD_REQUEST, "이미 삭제된 알림입니다."),
-    NOTIFICATION_CANNOT_BE_DELETED(HttpStatus.BAD_REQUEST, "삭제할 수 없는 알림입니다.?");
+    NOTIFICATION_CANNOT_BE_DELETED(HttpStatus.BAD_REQUEST, "삭제할 수 없는 알림입니다.?"),
+
+    // chat
+    CHATROOM_NOT_FOUND(HttpStatus.BAD_REQUEST, "존재하지 않는 채팅방 입니다.");
 
     private final HttpStatus httpStatus;
     private final String message;

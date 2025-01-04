@@ -34,6 +34,7 @@ public class JWTFilter extends OncePerRequestFilter {
 
         String requestUri = request.getRequestURI();
         String requestMethod = request.getMethod();
+        log.info("검증 필터 url = {}", request.getRequestURI());
 
         // 인증이 필요 없는 요청 처리
         if ((requestUri.matches("^/api/auths/signup$") && requestMethod.equals("POST")) ||
@@ -46,7 +47,8 @@ public class JWTFilter extends OncePerRequestFilter {
                 (requestUri.matches("^/swagger-ui(/.*)?$")) ||
                 (requestUri.matches("^/swagger-ui.html$")) ||
                 (requestUri.matches("^/v3/api-docs(?:/.*)?$")) ||
-                (requestUri.matches("^/api/auths/reissue$") && requestMethod.equals("POST"))) {
+                (requestUri.matches("^/api/auths/reissue$") && requestMethod.equals("POST")) ||
+                (requestUri.matches("^/ws($|/.*)"))) {
 
             filterChain.doFilter(request, response);
             return;

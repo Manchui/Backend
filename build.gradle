@@ -79,6 +79,16 @@ dependencies {
     //spring-test 의존성
     implementation 'org.springframework:spring-test:6.1.13'
 
+    // websocket 의존성
+    implementation 'org.springframework.boot:spring-boot-starter-websocket'
+
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
+
+    // RabbitMQ
+    implementation 'org.springframework.boot:spring-boot-starter-amqp'
+    implementation 'org.springframework.boot:spring-boot-starter-reactor-netty'
+
 }
 
 tasks.processResources {

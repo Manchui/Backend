@@ -113,7 +113,11 @@ public class SecurityConfig {
                                 // OAuth2 로그인 관련
                                 "/login/oauth2/callback/kakao",
                                 "/login/oauth2/callback/google",
-                                "/login/oauth2/callback/naver"
+                                "/login/oauth2/callback/naver",
+
+                                // 채팅 관련
+                                "/api/chat/list/**",
+                                "/ws/**"
                                 ).permitAll()
 
                         .anyRequest().authenticated()
