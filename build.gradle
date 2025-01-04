@@ -71,6 +71,11 @@ dependencies {
     //Oauth2 의존성
     implementation "org.springframework.boot:spring-boot-starter-oauth2-client"
 
+    implementation 'org.mapstruct:mapstruct:1.5.5.Final'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
+
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+
     //spring-test 의존성
     implementation 'org.springframework:spring-test:6.1.13'
 
@@ -83,6 +88,7 @@ dependencies {
     // RabbitMQ
     implementation 'org.springframework.boot:spring-boot-starter-amqp'
     implementation 'org.springframework.boot:spring-boot-starter-reactor-netty'
+
 }
 
 tasks.processResources {

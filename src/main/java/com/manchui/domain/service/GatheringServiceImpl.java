@@ -7,6 +7,8 @@ import com.manchui.domain.dto.review.ReviewDetailPagingResponse;
 import com.manchui.domain.dto.review.ReviewInfo;
 import com.manchui.domain.dto.review.ReviewScoreInfo;
 import com.manchui.domain.entity.*;
+import com.manchui.domain.notification.entity.NotificationType;
+import com.manchui.domain.notification.service.NotificationServiceImpl;
 import com.manchui.domain.repository.*;
 import com.manchui.global.exception.CustomException;
 import jakarta.transaction.Transactional;
@@ -48,6 +50,8 @@ public class GatheringServiceImpl implements GatheringService {
     private final HeartRepository heartRepository;
 
     private final ReviewRepository reviewRepository;
+
+    private final NotificationServiceImpl notificationService;
 
     private final ChatRoomRepository chatRoomRepository;
 
@@ -198,6 +202,12 @@ public class GatheringServiceImpl implements GatheringService {
         if (currentAttendanceCount == gathering.getMinUsers()) gathering.open();
 
         log.info("사용자 {}가 모임 id {}에 참여했습니다.", user.getName(), gatheringId);
+
+        String content = user.getName() + "님이 회원님의 모임에 참여했습니다.";
+
+        // 모임의 주최자에게 알림이 가도록 설정
+        notificationService.send(gathering.getUser(), NotificationType.GATHERING_JOIN, content, gatheringId);
+
     }
 
     /**
@@ -229,6 +239,11 @@ public class GatheringServiceImpl implements GatheringService {
         if (currentAttendanceCount < gathering.getMinUsers()) gathering.close();
 
         log.info("사용자 {}가 모임 id {}에 대한 참여 신청을 취소했습니다.", user.getName(), gatheringId);
+
+        String content = user.getName() + "님이 회원님의 모임에서 참여를 취소했습니다.";
+
+        // 모임의 주최자에게 알림이 가도록 설정
+        notificationService.send(gathering.getUser(), NotificationType.GATHERING_QUIT, content, gatheringId);
     }
 
     /**
@@ -253,6 +268,14 @@ public class GatheringServiceImpl implements GatheringService {
                 });
 
         heartRepository.save(Heart.builder().gathering(gathering).user(user).build());
+
+        String content = user.getName() + "님이 회원님의 모임을 좋아합니다!";
+
+        log.info("gatheringId : {}", gatheringId);
+
+        // 모임의 주최자에게 알림이 가도록 설정
+        if (gathering.getUser().getId() != user.getId())
+            notificationService.send(gathering.getUser(), NotificationType.GATHERING_LIKE, content, gatheringId);
     }
 
     /**
@@ -436,7 +459,7 @@ public class GatheringServiceImpl implements GatheringService {
         Page<ReviewInfo> pageList = reviewRepository.getReviewInfoList(pageable, gatheringId);
         ReviewScoreInfo scoreInfo = reviewRepository.getScoreStatisticsByGathering(gatheringId);
 
-        return new ReviewDetailPagingResponse(pageList, scoreInfo);
+        return new ReviewDetailPagingResponse(pageList, scoreInfo, 0);
     }
 
 }

@@ -1,6 +1,7 @@
 package com.manchui.global.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.manchui.domain.notification.repository.EmitterRepository;
 import com.manchui.domain.service.RedisRefreshTokenService;
 import com.manchui.global.exception.CustomException;
 import com.manchui.global.exception.ErrorCode;
@@ -30,8 +31,11 @@ public class CustomLogoutFilter extends GenericFilterBean {
     private final JWTUtil jwtUtil;
     private final RedisRefreshTokenService redisRefreshTokenService;
 
+    private final EmitterRepository emitterRepository;
+
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+
         doFilter((HttpServletRequest) request, (HttpServletResponse) response, chain);
     }
 
@@ -57,6 +61,22 @@ public class CustomLogoutFilter extends GenericFilterBean {
             return;
         }
 
+        String authorization = request.getHeader("Authorization");
+
+        if (authorization == null || !authorization.startsWith("Bearer ")) {
+
+            filterChain.doFilter(request, response);
+            handleException(response, ErrorCode.INVALID_ACCESS_TOKEN);
+            throw new CustomException(ErrorCode.INVALID_ACCESS_TOKEN);
+        }
+
+        String accessToken = authorization.split(" ")[1];
+
+        String email = jwtUtil.getUsername(accessToken);
+
+        emitterRepository.deleteAllEmitterStartWithEmail(email);
+        emitterRepository.deleteAllEventCacheStartWithEmail(email);
+        log.info("사용자 {}의 Emitter와 Event Cache가 삭제되었습니다.", email);
 
         //Refresh 토큰 쿠키 만료
         setResponseCookie(response, "refresh", null);
@@ -66,10 +86,10 @@ public class CustomLogoutFilter extends GenericFilterBean {
         response.setCharacterEncoding("UTF-8");
         String jsonResponse =
                 "{\n" +
-                "    \"success\": true,\n" +
-                "    \"message\": \"로그아웃 성공\",\n" +
-                "    \"data\": null\n" +
-                "}";
+                        "    \"success\": true,\n" +
+                        "    \"message\": \"로그아웃 성공\",\n" +
+                        "    \"data\": null\n" +
+                        "}";
 
         response.getWriter().write(jsonResponse);
     }
@@ -145,7 +165,7 @@ public class CustomLogoutFilter extends GenericFilterBean {
         }
 
         //Bearer 부분 제거 후 순수 토큰만 획득
-        String accessToken= authorization.split(" ")[1];
+        String accessToken = authorization.split(" ")[1];
 
         //응답 header에 accessToken이 없는 경우
         if (accessToken == null) {
@@ -184,6 +204,7 @@ public class CustomLogoutFilter extends GenericFilterBean {
 
     // 예외 처리 응답을 직접 설정하는 메서드
     private void handleException(HttpServletResponse response, ErrorCode errorCode) {
+
         response.setStatus(errorCode.getHttpStatus().value());
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
@@ -201,4 +222,5 @@ public class CustomLogoutFilter extends GenericFilterBean {
             log.error("Failed to write error response", e);
         }
     }
+
 }

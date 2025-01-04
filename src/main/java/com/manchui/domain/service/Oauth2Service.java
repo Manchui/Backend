@@ -429,5 +429,3 @@ public class Oauth2Service {
                 .build();
     }
 }
-
-

@@ -18,9 +18,12 @@ public class SwaggerConfig {
                 .info(apiInfo())
                 .addTagsItem(new Tag().name("Join").description("회원가입 관련 API"))
                 .addTagsItem(new Tag().name("Users").description("사용자 관련 API"))
+                .addTagsItem(new Tag().name("Oauth2").description("소셜 로그인 관련 API"))
                 .addTagsItem(new Tag().name("Gatherings").description("모임 관련 API"))
                 .addTagsItem(new Tag().name("Reviews").description("후기 관련 API"))
-                .addTagsItem(new Tag().name("Token").description("토큰 관련 API"));
+                .addTagsItem(new Tag().name("Token").description("토큰 관련 API"))
+                .addTagsItem(new Tag().name("Notification"))
+                .addTagsItem(new Tag().name("SSE"));
     }
 
     private Info apiInfo() {
