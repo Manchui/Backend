@@ -421,7 +421,10 @@ public class GatheringServiceImpl implements GatheringService {
         Optional<User> user = Optional.ofNullable(email).map(userService::checkUser);
         boolean isHearted = isUser && user.flatMap(u -> heartRepository.findByUserAndGathering(u, gathering)).isPresent();
 
-        return new GatheringInfoResponse(gathering, image.getFilePath(), currentUsers, heartCounts, isHearted, userInfoList, reviewsList);
+        String roomId = chatRoomRepository.findById(gathering.getChatRoom().getId()).orElseThrow(
+                () -> new CustomException(CHATROOM_NOT_FOUND)).getRoomId();
+
+        return new GatheringInfoResponse(gathering, image.getFilePath(), currentUsers, heartCounts, isHearted, userInfoList, reviewsList, roomId);
     }
 
     // 상세 조회 후기 관련 응답 객체 생성
