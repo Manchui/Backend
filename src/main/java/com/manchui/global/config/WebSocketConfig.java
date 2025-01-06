@@ -1,7 +1,11 @@
 package com.manchui.global.config;
 
+import com.manchui.global.handler.StompErrorHandler;
+import com.manchui.global.handler.StompHandler;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.messaging.simp.config.ChannelRegistration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
@@ -10,7 +14,11 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 
 @Configuration
 @EnableWebSocketMessageBroker
+@RequiredArgsConstructor
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
+
+    private final StompHandler stompHandler;
+    private final StompErrorHandler stompErrorHandler;
 
     @Value("${message-broker.relay-host}")
     private String relayHost;
@@ -50,7 +58,14 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     // 클라이언트의 STOMP WebSocket 연결을 위한 엔드포인트 설정
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/ws") // WebSocket 연결 엔드포인트 설정
+        registry.setErrorHandler(stompErrorHandler)
+        .addEndpoint("/ws") // WebSocket 연결 엔드포인트 설정
                 .setAllowedOriginPatterns("*");
+    }
+
+    @Override
+    public void configureClientInboundChannel(ChannelRegistration registration) {
+        // Stomp 관련 Handler
+        registration.interceptors(stompHandler);
     }
 }
