@@ -49,7 +49,7 @@ public class ChatController {
         // 채팅 메시지를 데이터베이스에 저장하고, 저장이 완료되면 RabbitMQ를 통해 해당 채팅방(roomId)으로 메시지를 전송
         return chatMessageService.chatMessageSave(chatMessageRequest, roomId).doOnSuccess(chatMessage -> {
             rabbitTemplate.convertAndSend("chat.exchange", "room." + roomId, new ChatMessageResponse(
-                    chatMessageRequest.getSender(), chatMessageRequest.getMessage(), LocalDateTime.now()));
+                    chatMessageRequest.getSender(), chatMessageRequest.getMessage(), chatMessage.getChatMessageType(), LocalDateTime.now()));
             // 모든 작업이 성공적으로 완료되면 클라이언트에 성공 응답 반환
         }).then(Mono.just(ResponseEntity.ok().body(SuccessResponse.successWithNoData("메시지 전송 성공"))));
     }
