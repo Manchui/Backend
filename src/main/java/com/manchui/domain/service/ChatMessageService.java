@@ -21,7 +21,7 @@ public class ChatMessageService {
     // 채팅 저장 메서드
     public Mono<ChatMessage> chatMessageSave(ChatMessageRequest chatMessageRequest, String roomId) {
 
-        return chatMessageRepository.save(new ChatMessage(roomId, chatMessageRequest.getSender(),
+        return chatMessageRepository.save(new ChatMessage(roomId, ChatMessageType.MESSAGE,chatMessageRequest.getSender(),
                 chatMessageRequest.getMessage(), LocalDateTime.now()));
     }
 
