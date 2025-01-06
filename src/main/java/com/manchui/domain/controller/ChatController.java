@@ -35,9 +35,12 @@ public class ChatController {
     private final ChatRoomService chatRoomService;
 
     @GetMapping("/api/chat/list/{roomId}")
-    public Mono<ResponseEntity<SuccessResponse<List<ChatMessageResponse>>>> chatList(@PathVariable String roomId) {
+    public Mono<ResponseEntity<SuccessResponse<ChatMessageSliceResponse>>> chatList(@AuthenticationPrincipal CustomUserDetails customUserDetails,
+            @PathVariable String roomId,
+            @RequestParam(required = false) ObjectId lastMessageId,
+            @RequestParam(required = false, defaultValue = "20") int limit) {
 
-        Mono<List<ChatMessageResponse>> response = chatMessageService.findChatList(roomId);
+        Mono<ChatMessageSliceResponse> response = chatMessageService.findChatList(customUserDetails, roomId, lastMessageId, limit, rabbitTemplate);
 
         return response.map(SuccessResponse::successWithData)
                 .map(ResponseEntity::ok);
