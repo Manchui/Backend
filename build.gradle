@@ -89,6 +89,12 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-amqp'
     implementation 'org.springframework.boot:spring-boot-starter-reactor-netty'
 
+
+    // Actuator 의조성
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    // Prometheus 의존성
+    implementation 'io.micrometer:micrometer-registry-prometheus'
+
 }
 
 tasks.processResources {
