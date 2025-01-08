@@ -113,10 +113,11 @@ jobs:
             # 작업 디렉토리 이동
             cd /home/${{ secrets.SSH_USER }}/deploy
           
+            # 새 이미지를 pull
+            sudo docker-compose pull \$NEXT_ENV
+          
             # 다음 환경의 컨테이너 실행
             sudo docker-compose up -d \$NEXT_ENV
-          
-            
           
             # Nginx proxy_pass 전환
             sed -i "s|proxy_pass http://.*;|proxy_pass http://\$NEXT_ENV;|g" Nginx/config/nginx.conf
@@ -137,6 +138,9 @@ jobs:
             # active_env.txt 파일 업데이트  
             echo \$NEXT_ENV > active_env.txt
             echo "active_env.txt: \$NEXT_ENV"
+          
+            # 안 쓰이는 이미지 정리
+            sudo docker image prune
           EOF
 
       - name: .env 파일 정리
