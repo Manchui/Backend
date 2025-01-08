@@ -55,6 +55,8 @@ public class GatheringServiceImpl implements GatheringService {
 
     private final ChatRoomRepository chatRoomRepository;
 
+    private final ChatRoomUserRepository chatRoomUserRepository;
+
     /**
      * 0. 모임 생성
      * 작성자 : 오예령
@@ -116,6 +118,7 @@ public class GatheringServiceImpl implements GatheringService {
             // 2. 모임 및 이미지 객체 저장
             ChatRoom chatRoom = new ChatRoom(UUID.randomUUID().toString());
             chatRoomRepository.save(chatRoom);
+            chatRoomUserRepository.save(new ChatRoomUser(user, chatRoom));
             Gathering gathering = gatheringStore.saveGathering(createRequest, user, gatheringDate, dueDate, chatRoom);
             imageService.uploadGatheringImage(createRequest.getGatheringImage(), gathering.getId(), false);
 
