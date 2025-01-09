@@ -5,6 +5,8 @@ import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+
 
 public interface ChatMessageRepository extends ReactiveMongoRepository<ChatMessage, String> {
 
@@ -12,4 +14,6 @@ public interface ChatMessageRepository extends ReactiveMongoRepository<ChatMessa
 
     @Query(value = "{ 'roomId': ?0, '_id': { $lt: ?1 } }", sort = "{ '_id': -1 }")
     Flux<ChatMessage> findByRoomIdAndIdLessThanOrderByIdDesc(String roomId, ObjectId lastMessageId);
+
+    Mono<ChatMessage> findFirstByRoomIdOrderByCreatedAtDesc(String roomId);
 }
