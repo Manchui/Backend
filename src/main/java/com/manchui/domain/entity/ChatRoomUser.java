@@ -1,5 +1,6 @@
 package com.manchui.domain.entity;
 
+import com.manchui.global.entity.Timestamped;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -8,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class ChatRoomUser {
+public class ChatRoomUser extends Timestamped {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
