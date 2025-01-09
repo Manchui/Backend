@@ -46,6 +46,9 @@ public class SecurityConfig {
     @Value("${token.refresh.expiration}")
     private Long refreshTokenExpiration;
 
+    @Value("${management.server.base-path}")
+    private String actBasePath;
+
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
 
@@ -117,7 +120,9 @@ public class SecurityConfig {
 
                                 // 채팅 관련
                                 "/api/chat/list/**",
-                                "/ws/**"
+                                "/ws/**",
+
+                                "/actuator/prometheus"
                                 ).permitAll()
 
                         .anyRequest().authenticated()
@@ -129,7 +134,7 @@ public class SecurityConfig {
 
         //JWT 필터 적용
         http
-                .addFilterAfter(new JWTFilter(jwtUtil, redisRefreshTokenService), LoginFilter.class);
+                .addFilterAfter(new JWTFilter(jwtUtil, redisRefreshTokenService, actBasePath), LoginFilter.class);
 
 
         //커스텀 로그아웃 필터 적용

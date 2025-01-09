@@ -38,3 +38,9 @@ out/
 
 ## 환경변수 설정 파일
 .env
+
+# 로그 파일
+logs/
+
+# grafana 데이터 파일
+grafana-data
