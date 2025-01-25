@@ -50,7 +50,7 @@
 ### 👩🏻‍💻 R&R
 | 담당자                                      | 담당 업무                                                        |
 |:-------------------------------------------:|------------------------------------------------------------------|
-| [강병훈](https://github.com/yosong6729) | 사용자 기능 구현 (로그인, 회원가입, 회원정보 조회, 회원정보 수정)     |
+| [강병훈](https://github.com/yosong6729) | 사용자 기능 구현 (로그인, 회원가입, 회원정보 조회, 회원정보 수정), 마이페이지 기능(사용자 참여 모임 목록 조회,  사용자 리뷰 목록 조회, 사용자가 만든 모임 목록 조회)   |
 | [오예령](https://github.com/ohyeryung)       | 모임, 후기 도메인 개발 |
 
 <br>
@@ -81,10 +81,10 @@
 ## 🛠️ 프로젝트 환경
 
 ### 기술 스택
-<img src="https://github.com/user-attachments/assets/85b8ad30-b1dd-416a-b82f-594946e17143" width="500" />
+<img src="https://github.com/user-attachments/assets/54ca2bcb-b582-46d9-89b3-45feba2f574a" width="500" />
 
 ### 인프라
-<img src="https://github.com/user-attachments/assets/9aeb1a8f-ee69-4c1a-851c-1b39d2eaed69" width="500" />
+<img src="https://github.com/user-attachments/assets/e90a0687-7d3e-482f-a85f-97883ad23bc2" width="500" />
 
 <br/>
 
