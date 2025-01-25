@@ -1,10 +1,7 @@
 package com.manchui.domain.controller;
 
 import com.manchui.domain.dto.CustomUserDetails;
-import com.manchui.domain.dto.chat.ChatMessageRequest;
-import com.manchui.domain.dto.chat.ChatMessageResponse;
-import com.manchui.domain.dto.chat.ChatMessageSliceResponse;
-import com.manchui.domain.dto.chat.ChatRoomUserListResponse;
+import com.manchui.domain.dto.chat.*;
 import com.manchui.domain.service.ChatMessageService;
 import com.manchui.domain.service.ChatRoomService;
 import com.manchui.global.response.SuccessResponse;
@@ -63,5 +60,11 @@ public class ChatController {
         ChatRoomUserListResponse response = chatRoomService.chatRoomUserList(roomId);
 
         return ResponseEntity.ok(SuccessResponse.successWithData(response));
+    }
+
+    @GetMapping("/api/chat/room/list")
+    public ResponseEntity<SuccessResponse<ChatRoomListResponse>> chatRoomList(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
+
+        return ResponseEntity.ok().body(SuccessResponse.successWithData(chatRoomService.chatRoomList(customUserDetails)));
     }
 }

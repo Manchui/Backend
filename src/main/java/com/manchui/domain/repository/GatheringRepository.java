@@ -1,5 +1,6 @@
 package com.manchui.domain.repository;
 
+import com.manchui.domain.entity.ChatRoom;
 import com.manchui.domain.entity.Gathering;
 import com.manchui.domain.entity.User;
 import com.manchui.domain.repository.querydsl.GatheringCursorQueryDsl;
@@ -21,4 +22,5 @@ public interface GatheringRepository extends JpaRepository<Gathering, Long>, Gat
 
     List<Gathering> findByUserAndIsClosedAndIsCanceled(User user, boolean isClosed, boolean isCanceled);
 
+    Optional<Gathering> findByChatRoomEquals(ChatRoom chatRoom);
 }
