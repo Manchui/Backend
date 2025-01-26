@@ -11,4 +11,5 @@ public class ChatMessageSliceResponse {
 
     private List<ChatMessageResponse> chatMessageResponseList;
     private Boolean hasNext;
+    private String nextCursor;
 }
