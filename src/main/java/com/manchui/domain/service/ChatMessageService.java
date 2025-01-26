@@ -91,6 +91,10 @@ public class ChatMessageService {
                 .map(messages -> {
                     // limit + 1개 중 실제 limit개만 표시하고, 나머지 1개로 hasNext 판단
                     boolean hasNext = messages.size() > limit;
+                    String nextCursor = null;
+                    if(hasNext){
+                        nextCursor = messages.get(limit - 1).get_id();
+                    }
                     List<ChatMessageResponse> content = messages.stream().limit(limit)
                             .map(chatMessage ->
                                     new ChatMessageResponse(
@@ -101,7 +105,7 @@ public class ChatMessageService {
                                             chatMessage.getCreatedAt()
                                     )).collect(Collectors.toList());
 
-                    return new ChatMessageSliceResponse(content, hasNext);
+                    return new ChatMessageSliceResponse(content, hasNext, nextCursor);
                 });
     }
 }
