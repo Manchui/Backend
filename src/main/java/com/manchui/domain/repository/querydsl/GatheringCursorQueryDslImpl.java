@@ -2,6 +2,7 @@ package com.manchui.domain.repository.querydsl;
 
 import com.manchui.domain.dto.gathering.GatheringCursorPagingResponse;
 import com.manchui.domain.dto.gathering.GatheringListResponse;
+import com.manchui.domain.entity.Category;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.ConstructorExpression;
 import com.querydsl.core.types.Projections;
@@ -168,8 +169,9 @@ public class GatheringCursorQueryDslImpl implements GatheringCursorQueryDsl {
             condition = condition.and(gathering.gatheringDate.between(start.atStartOfDay(), end.atTime(23, 59, 59)));
         }
 
-        if (category != null && !category.isEmpty()) {
-            condition = condition.and(gathering.category.eq(category));
+        if (category != null && !category.isEmpty() && !category.equalsIgnoreCase("all")) {
+            String koreanCategory = Category.toKorean(category);
+            condition = condition.and(gathering.category.eq(koreanCategory));
         }
 
         return condition;
