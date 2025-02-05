@@ -43,6 +43,11 @@ public class ChatMessageService {
                 chatMessageRequest.getMessage(), LocalDateTime.now()));
     }
 
+    public Mono<ChatMessage> chatRoomOpenMessageSave(ChatMessageRequest chatMessageRequest, String roomId){
+        return chatMessageRepository.save(new ChatMessage(roomId, ChatMessageType.OPEN,chatMessageRequest.getSender(),
+                chatMessageRequest.getMessage(), LocalDateTime.now()));
+    }
+
     //채팅방 입장 및 채팅 목록 조회 메서드
     public Mono<ChatMessageSliceResponse> findChatList(CustomUserDetails customUserDetails, String roomId, ObjectId lastMessageId, int limit,
                                                         RabbitTemplate rabbitTemplate) {
