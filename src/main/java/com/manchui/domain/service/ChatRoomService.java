@@ -38,7 +38,7 @@ public class ChatRoomService {
 
         ChatRoom chatRoom = chatRoomRepository.findByRoomId(roomId);
 
-        List<ChatRoomUser> userList = chatRoomUserRepository.findByChatRoomEquals(chatRoom);
+        List<ChatRoomUser> userList = chatRoomUserRepository.findByChatRoomEqualsAndDeletedAtIsNull(chatRoom);
 
         List<UserInfo> userInfoList = userList.stream().map(m -> new UserInfo(
                 m.getUser().getName(),
@@ -54,7 +54,7 @@ public class ChatRoomService {
         String userEmail = customUserDetails.getUsername();
         User user = userRepository.findByEmail(userEmail);
         // 사용자가 속하 ChatRoomUser 조회
-        List<ChatRoomUser> chatRoomUsers = chatRoomUserRepository.findByUser(user);
+        List<ChatRoomUser> chatRoomUsers = chatRoomUserRepository.findByUserAndDeletedAtIsNull(user);
         // ChatRoomUser -> DTO(ChatRoomListDetail) 변환
         List<ChatRoomListDetail> chatRoomListDetails = chatRoomUsers.stream().map((m -> {
             ChatRoom chatRoom = m.getChatRoom();
@@ -62,7 +62,7 @@ public class ChatRoomService {
                     () -> new CustomException(ErrorCode.GATHERING_NOT_FOUND));
 
             Image image = imageRepository.findByGatheringId(gathering.getId());
-            List<ChatRoomUser> chatRoomEquals = chatRoomUserRepository.findByChatRoomEquals(chatRoom);
+            List<ChatRoomUser> chatRoomEquals = chatRoomUserRepository.findByChatRoomEqualsAndDeletedAtIsNull(chatRoom);
 
             ChatMessage lastMessage = chatMessageRepository.findFirstByRoomIdOrderByCreatedAtDesc(chatRoom.getRoomId()).block();
             return new ChatRoomListDetail(m.getChatRoom().getRoomId(), image.getFilePath(), gathering.getGroupName(),
