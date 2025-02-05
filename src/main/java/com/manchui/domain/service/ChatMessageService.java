@@ -43,6 +43,12 @@ public class ChatMessageService {
                 chatMessageRequest.getMessage(), LocalDateTime.now()));
     }
 
+    public Mono<ChatMessage> chatQuiteMessageSave(ChatMessageRequest chatMessageRequest, String roomId){
+
+        return chatMessageRepository.save(new ChatMessage(roomId, ChatMessageType.QUITE,chatMessageRequest.getSender(),
+                chatMessageRequest.getSender() + chatMessageRequest.getMessage(), LocalDateTime.now()));
+    }
+
     public Mono<ChatMessage> chatRoomOpenMessageSave(ChatMessageRequest chatMessageRequest, String roomId){
         return chatMessageRepository.save(new ChatMessage(roomId, ChatMessageType.OPEN,chatMessageRequest.getSender(),
                 chatMessageRequest.getMessage(), LocalDateTime.now()));

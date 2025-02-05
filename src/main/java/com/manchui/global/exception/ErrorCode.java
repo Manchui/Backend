@@ -75,7 +75,8 @@ public enum ErrorCode {
     NOTIFICATION_CANNOT_BE_DELETED(HttpStatus.BAD_REQUEST, "삭제할 수 없는 알림입니다.?"),
 
     // chat
-    CHATROOM_NOT_FOUND(HttpStatus.BAD_REQUEST, "존재하지 않는 채팅방 입니다.");
+    CHATROOM_NOT_FOUND(HttpStatus.BAD_REQUEST, "존재하지 않는 채팅방 입니다."),
+    MEMBER_NOT_IN_CHATROOM(HttpStatus.NOT_FOUND, "회원이 해당 채팅방에 속하지 않습니다.");
 
     private final HttpStatus httpStatus;
     private final String message;

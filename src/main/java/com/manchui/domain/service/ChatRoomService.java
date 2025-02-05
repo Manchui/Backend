@@ -12,7 +12,9 @@ import com.manchui.domain.repository.mongodb.ChatMessageRepository;
 import com.manchui.global.exception.CustomException;
 import com.manchui.global.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.Comparator;
@@ -21,6 +23,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class ChatRoomService {
 
     private final ChatRoomUserRepository chatRoomUserRepository;
@@ -67,5 +70,17 @@ public class ChatRoomService {
         })).sorted(Comparator.comparing(ChatRoomListDetail::getLastMessageTime).reversed()).collect(Collectors.toList());
 
         return new ChatRoomListResponse(chatRoomListDetails);
+    }
+
+    // 채팅방에 속한 사용자 softDelete
+    @Transactional
+    public void chatRoomQuite(String email, String roomId){
+
+        User user = userRepository.findByEmail(email);
+        ChatRoom chatRoom = chatRoomRepository.findByRoomId(roomId);
+        ChatRoomUser chatRoomUser = chatRoomUserRepository.findByUserEqualsAndChatRoomEqualsAndDeletedAtIsNull(user, chatRoom).orElseThrow(
+                () -> new CustomException(ErrorCode.MEMBER_NOT_IN_CHATROOM)
+        );
+        chatRoomUser.softDelete();
     }
 }
