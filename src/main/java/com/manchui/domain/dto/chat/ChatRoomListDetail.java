@@ -15,4 +15,5 @@ public class ChatRoomListDetail {
     private int userNum;
     private LocalDateTime lastMessageTime;
     private String lastMessage;
+    private String lastMessageUserName;
 }

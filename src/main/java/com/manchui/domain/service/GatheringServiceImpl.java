@@ -2,6 +2,7 @@ package com.manchui.domain.service;
 
 import com.manchui.domain.dto.CustomUserDetails;
 import com.manchui.domain.dto.UserInfo;
+import com.manchui.domain.dto.chat.ChatMessageRequest;
 import com.manchui.domain.dto.gathering.*;
 import com.manchui.domain.dto.review.ReviewDetailPagingResponse;
 import com.manchui.domain.dto.review.ReviewInfo;
@@ -56,6 +57,9 @@ public class GatheringServiceImpl implements GatheringService {
     private final ChatRoomRepository chatRoomRepository;
 
     private final ChatRoomUserRepository chatRoomUserRepository;
+
+    private final ChatMessageService chatMessageService;
+
 
     /**
      * 0. 모임 생성
@@ -117,8 +121,10 @@ public class GatheringServiceImpl implements GatheringService {
         } else {
             // 2. 모임 및 이미지 객체 저장
             ChatRoom chatRoom = new ChatRoom(UUID.randomUUID().toString());
-            chatRoomRepository.save(chatRoom);
+            String roomId = chatRoomRepository.save(chatRoom).getRoomId();
             chatRoomUserRepository.save(new ChatRoomUser(user, chatRoom));
+            chatMessageService.chatRoomOpenMessageSave(new ChatMessageRequest(user.getName(), user.getName() + "님이 채팅방을 개설하였습니다."), roomId).block();
+
             Gathering gathering = gatheringStore.saveGathering(createRequest, user, gatheringDate, dueDate, chatRoom);
             imageService.uploadGatheringImage(createRequest.getGatheringImage(), gathering.getId(), false);
 

@@ -12,7 +12,9 @@ import com.manchui.domain.repository.mongodb.ChatMessageRepository;
 import com.manchui.global.exception.CustomException;
 import com.manchui.global.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.Comparator;
@@ -21,6 +23,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class ChatRoomService {
 
     private final ChatRoomUserRepository chatRoomUserRepository;
@@ -35,7 +38,7 @@ public class ChatRoomService {
 
         ChatRoom chatRoom = chatRoomRepository.findByRoomId(roomId);
 
-        List<ChatRoomUser> userList = chatRoomUserRepository.findByChatRoomEquals(chatRoom);
+        List<ChatRoomUser> userList = chatRoomUserRepository.findByChatRoomEqualsAndDeletedAtIsNull(chatRoom);
 
         List<UserInfo> userInfoList = userList.stream().map(m -> new UserInfo(
                 m.getUser().getName(),
@@ -51,7 +54,7 @@ public class ChatRoomService {
         String userEmail = customUserDetails.getUsername();
         User user = userRepository.findByEmail(userEmail);
         // 사용자가 속하 ChatRoomUser 조회
-        List<ChatRoomUser> chatRoomUsers = chatRoomUserRepository.findByUser(user);
+        List<ChatRoomUser> chatRoomUsers = chatRoomUserRepository.findByUserAndDeletedAtIsNull(user);
         // ChatRoomUser -> DTO(ChatRoomListDetail) 변환
         List<ChatRoomListDetail> chatRoomListDetails = chatRoomUsers.stream().map((m -> {
             ChatRoom chatRoom = m.getChatRoom();
@@ -59,13 +62,25 @@ public class ChatRoomService {
                     () -> new CustomException(ErrorCode.GATHERING_NOT_FOUND));
 
             Image image = imageRepository.findByGatheringId(gathering.getId());
-            List<ChatRoomUser> chatRoomEquals = chatRoomUserRepository.findByChatRoomEquals(chatRoom);
+            List<ChatRoomUser> chatRoomEquals = chatRoomUserRepository.findByChatRoomEqualsAndDeletedAtIsNull(chatRoom);
 
             ChatMessage lastMessage = chatMessageRepository.findFirstByRoomIdOrderByCreatedAtDesc(chatRoom.getRoomId()).block();
             return new ChatRoomListDetail(m.getChatRoom().getRoomId(), image.getFilePath(), gathering.getGroupName(),
-                    chatRoomEquals.size(), lastMessage.getCreatedAt(), lastMessage.getMessage());
+                    chatRoomEquals.size(), lastMessage.getCreatedAt(), lastMessage.getMessage(), lastMessage.getSender());
         })).sorted(Comparator.comparing(ChatRoomListDetail::getLastMessageTime).reversed()).collect(Collectors.toList());
 
         return new ChatRoomListResponse(chatRoomListDetails);
+    }
+
+    // 채팅방에 속한 사용자 softDelete
+    @Transactional
+    public void chatRoomQuite(String email, String roomId){
+
+        User user = userRepository.findByEmail(email);
+        ChatRoom chatRoom = chatRoomRepository.findByRoomId(roomId);
+        ChatRoomUser chatRoomUser = chatRoomUserRepository.findByUserEqualsAndChatRoomEqualsAndDeletedAtIsNull(user, chatRoom).orElseThrow(
+                () -> new CustomException(ErrorCode.MEMBER_NOT_IN_CHATROOM)
+        );
+        chatRoomUser.softDelete();
     }
 }

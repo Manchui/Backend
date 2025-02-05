@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
 
+import java.security.Principal;
 import java.time.LocalDateTime;
 
 @RestController
@@ -52,6 +54,25 @@ public class ChatController {
                     chatMessageRequest.getSender(), chatMessageRequest.getMessage(), chatMessage.getChatMessageType(), LocalDateTime.now()));
             // 모든 작업이 성공적으로 완료되면 클라이언트에 성공 응답 반환
         }).then(Mono.just(ResponseEntity.ok().body(SuccessResponse.successWithNoData("메시지 전송 성공"))));
+    }
+
+    @MessageMapping("chat.leave.{roomId}")
+    public Mono<ResponseEntity<SuccessResponse<Void>>> chatRoomLeave(@DestinationVariable String roomId,
+                                                                     @RequestBody ChatMessageRequest chatMessageRequest,
+                                                                     Principal principal){
+
+        return chatMessageService.chatQuiteMessageSave(chatMessageRequest, roomId).flatMap(chatMessage -> {
+           // 채팅방 나가기 메시지 전송
+            rabbitTemplate.convertAndSend("chat.exchange", "room." + roomId, new ChatMessageResponse(
+                    chatMessageRequest.getSender(), chatMessageRequest.getSender() + chatMessageRequest.getMessage(), chatMessage.getChatMessageType(), LocalDateTime.now()));
+
+           // 블로킹 JPA 메서드는 별도 스레드에서 실행
+           // 채팅방 유저 목록에서 유저 softDelete
+           return Mono.fromCallable(() -> {
+               chatRoomService.chatRoomQuite(principal.getName(), roomId);
+               return null;
+           }).subscribeOn(Schedulers.boundedElastic());
+        }).then(Mono.just(ResponseEntity.ok().body(SuccessResponse.successWithNoData("채팅방 나기기 성공"))));
     }
 
     @GetMapping("/api/chat/user/list/{roomId}")
