@@ -66,7 +66,7 @@ public class ChatRoomService {
 
             ChatMessage lastMessage = chatMessageRepository.findFirstByRoomIdOrderByCreatedAtDesc(chatRoom.getRoomId()).block();
             return new ChatRoomListDetail(m.getChatRoom().getRoomId(), image.getFilePath(), gathering.getGroupName(),
-                    chatRoomEquals.size(), lastMessage.getCreatedAt(), lastMessage.getMessage());
+                    chatRoomEquals.size(), lastMessage.getCreatedAt(), lastMessage.getMessage(), lastMessage.getSender());
         })).sorted(Comparator.comparing(ChatRoomListDetail::getLastMessageTime).reversed()).collect(Collectors.toList());
 
         return new ChatRoomListResponse(chatRoomListDetails);
