@@ -121,6 +121,7 @@ public class SecurityConfig {
                                 // 채팅 관련
                                 "/api/chat/list/**",
                                 "/ws/**",
+                                "/api/notifications/**",
 
                                 "/actuator/prometheus"
                                 ).permitAll()
