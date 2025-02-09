@@ -85,10 +85,13 @@ public class ChatMessageService {
 
                         if (chatRoomUser.isEmpty()) {
                             // 채팅방 첫입장
-                            chatRoomUserUpdatedAt = chatRoomUserRepository.save(new ChatRoomUser(user, chatRoom)).getUser().getUpdatedAt();
-                            chatMessageRepository.save(new ChatMessage(roomId, ChatMessageType.ENTER, user.getName(), user.getName() + " 님이 입장 하셨습니다.", LocalDateTime.now())).block();
+                            ChatRoomUser savedChatRoomUser = chatRoomUserRepository.save(new ChatRoomUser(user, chatRoom));
+                            chatRoomUserRepository.flush();
+                            chatRoomUserUpdatedAt = savedChatRoomUser.getUpdatedAt();
+
+                            chatMessageRepository.save(new ChatMessage(roomId, ChatMessageType.ENTER, user.getName(), user.getName() + " 님이 입장 하셨습니다.", chatRoomUserUpdatedAt)).block();
                             rabbitTemplate.convertAndSend("chat.exchange", "room." + roomId, new ChatMessageResponse(
-                                    user.getName(), user.getName() + " 님이 입장 하셨습니다.", ChatMessageType.ENTER, LocalDateTime.now()));
+                                    user.getName(), user.getName() + " 님이 입장 하셨습니다.", ChatMessageType.ENTER, chatRoomUserUpdatedAt));
                         }else if(chatRoomUser.get().getDeletedAt() != null){
                             // 채팅방 재입장
                             chatRoomUser.get().restore();
