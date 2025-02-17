@@ -1,6 +1,6 @@
-package com.manchui.domain.repository.mongodb;
+package com.manchui.domain.chat.repository.mongodb;
 
-import com.manchui.domain.entity.mongodb.ChatMessage;
+import com.manchui.domain.chat.entity.mongodb.ChatMessage;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;

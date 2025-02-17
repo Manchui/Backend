@@ -1,9 +1,9 @@
-package com.manchui.domain.controller;
+package com.manchui.domain.chat.controller;
 
-import com.manchui.domain.dto.CustomUserDetails;
-import com.manchui.domain.dto.chat.*;
-import com.manchui.domain.service.ChatMessageService;
-import com.manchui.domain.service.ChatRoomService;
+import com.manchui.domain.chat.dto.*;
+import com.manchui.domain.auth.dto.CustomUserDetails;
+import com.manchui.domain.chat.service.ChatMessageService;
+import com.manchui.domain.chat.service.ChatRoomService;
 import com.manchui.global.response.SuccessResponse;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import lombok.RequiredArgsConstructor;

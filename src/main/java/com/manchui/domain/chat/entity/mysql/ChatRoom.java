@@ -1,4 +1,4 @@
-package com.manchui.domain.entity;
+package com.manchui.domain.chat.entity.mysql;
 
 import com.manchui.global.entity.Timestamped;
 import jakarta.persistence.*;

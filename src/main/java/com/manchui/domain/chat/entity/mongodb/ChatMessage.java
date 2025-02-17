@@ -1,4 +1,4 @@
-package com.manchui.domain.entity.mongodb;
+package com.manchui.domain.chat.entity.mongodb;
 
 import jakarta.persistence.Id;
 import lombok.AccessLevel;

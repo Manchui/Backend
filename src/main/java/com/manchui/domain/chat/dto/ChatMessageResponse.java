@@ -1,6 +1,6 @@
-package com.manchui.domain.dto.chat;
+package com.manchui.domain.chat.dto;
 
-import com.manchui.domain.entity.mongodb.ChatMessageType;
+import com.manchui.domain.chat.entity.mongodb.ChatMessageType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

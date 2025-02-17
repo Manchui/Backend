@@ -1,4 +1,4 @@
-package com.manchui.domain.dto.chat;
+package com.manchui.domain.chat.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,6 +1,6 @@
-package com.manchui.domain.dto.chat;
+package com.manchui.domain.chat.dto;
 
-import com.manchui.domain.dto.UserInfo;
+import com.manchui.domain.user.dto.UserInfo;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

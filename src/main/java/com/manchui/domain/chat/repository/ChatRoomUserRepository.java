@@ -1,9 +1,9 @@
-package com.manchui.domain.repository;
+package com.manchui.domain.chat.repository;
 
 
-import com.manchui.domain.entity.ChatRoom;
-import com.manchui.domain.entity.ChatRoomUser;
-import com.manchui.domain.entity.User;
+import com.manchui.domain.chat.entity.mysql.ChatRoom;
+import com.manchui.domain.chat.entity.mysql.ChatRoomUser;
+import com.manchui.domain.user.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
