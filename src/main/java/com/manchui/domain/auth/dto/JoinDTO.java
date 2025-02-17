@@ -1,4 +1,4 @@
-package com.manchui.domain.dto;
+package com.manchui.domain.auth.dto;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;

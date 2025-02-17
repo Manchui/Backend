@@ -1,8 +1,8 @@
-package com.manchui.domain.controller;
+package com.manchui.domain.auth.controller;
 
-import com.manchui.domain.dto.JoinDTO;
-import com.manchui.domain.dto.NameDTO;
-import com.manchui.domain.service.JoinService;
+import com.manchui.domain.auth.dto.JoinDTO;
+import com.manchui.domain.auth.dto.NameDTO;
+import com.manchui.domain.auth.service.JoinService;
 import com.manchui.global.response.SuccessResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;

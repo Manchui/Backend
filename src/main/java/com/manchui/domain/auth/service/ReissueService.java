@@ -1,4 +1,4 @@
-package com.manchui.domain.service;
+package com.manchui.domain.auth.service;
 
 import com.manchui.global.exception.CustomException;
 import com.manchui.global.exception.ErrorCode;

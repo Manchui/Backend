@@ -1,6 +1,6 @@
-package com.manchui.domain.dto;
+package com.manchui.domain.auth.dto;
 
-import com.manchui.domain.entity.User;
+import com.manchui.domain.user.entity.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;

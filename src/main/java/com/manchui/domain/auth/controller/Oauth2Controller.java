@@ -1,6 +1,6 @@
-package com.manchui.domain.controller;
+package com.manchui.domain.auth.controller;
 
-import com.manchui.domain.service.Oauth2Service;
+import com.manchui.domain.auth.service.Oauth2Service;
 import com.manchui.global.response.SuccessResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;

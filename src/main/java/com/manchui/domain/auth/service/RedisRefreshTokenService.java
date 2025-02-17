@@ -1,4 +1,4 @@
-package com.manchui.domain.service;
+package com.manchui.domain.auth.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

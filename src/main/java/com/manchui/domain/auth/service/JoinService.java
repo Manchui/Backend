@@ -1,9 +1,9 @@
-package com.manchui.domain.service;
+package com.manchui.domain.auth.service;
 
-import com.manchui.domain.dto.JoinDTO;
-import com.manchui.domain.dto.NameDTO;
-import com.manchui.domain.entity.User;
-import com.manchui.domain.repository.UserRepository;
+import com.manchui.domain.auth.dto.JoinDTO;
+import com.manchui.domain.auth.dto.NameDTO;
+import com.manchui.domain.user.entity.User;
+import com.manchui.domain.user.repository.UserRepository;
 import com.manchui.global.exception.CustomException;
 import com.manchui.global.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
