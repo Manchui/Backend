@@ -1,14 +1,16 @@
-package com.manchui.domain.service;
+package com.manchui.domain.user.service;
 
-import com.manchui.domain.dto.CustomUserDetails;
-import com.manchui.domain.dto.User.*;
+import com.manchui.domain.auth.dto.CustomUserDetails;
 import com.manchui.domain.entity.*;
 import com.manchui.domain.repository.*;
+import com.manchui.domain.service.ImageServiceImpl;
+import com.manchui.domain.user.dto.*;
+import com.manchui.domain.user.entity.User;
+import com.manchui.domain.user.repository.UserRepository;
 import com.manchui.global.exception.CustomException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;

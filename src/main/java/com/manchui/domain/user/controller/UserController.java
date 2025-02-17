@@ -1,9 +1,9 @@
-package com.manchui.domain.controller;
+package com.manchui.domain.user.controller;
 
-import com.manchui.domain.dto.CustomUserDetails;
-import com.manchui.domain.dto.User.*;
-import com.manchui.domain.entity.User;
-import com.manchui.domain.service.UserService;
+import com.manchui.domain.auth.dto.CustomUserDetails;
+import com.manchui.domain.user.entity.User;
+import com.manchui.domain.user.service.UserService;
+import com.manchui.domain.user.dto.*;
 import com.manchui.global.response.SuccessResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;

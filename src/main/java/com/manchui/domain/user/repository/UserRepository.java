@@ -1,6 +1,6 @@
-package com.manchui.domain.repository;
+package com.manchui.domain.user.repository;
 
-import com.manchui.domain.entity.User;
+import com.manchui.domain.user.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

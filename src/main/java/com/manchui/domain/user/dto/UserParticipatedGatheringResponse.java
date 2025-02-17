@@ -1,4 +1,4 @@
-package com.manchui.domain.dto.User;
+package com.manchui.domain.user.dto;
 
 import lombok.Getter;
 import lombok.Setter;
