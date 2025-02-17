@@ -1,6 +1,6 @@
 package com.manchui.domain.controller;
 
-import com.manchui.domain.dto.CustomUserDetails;
+import com.manchui.domain.auth.dto.CustomUserDetails;
 import com.manchui.domain.dto.gathering.*;
 import com.manchui.domain.service.GatheringService;
 import com.manchui.global.response.SuccessResponse;

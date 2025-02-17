@@ -1,5 +1,6 @@
 package com.manchui.domain.entity;
 
+import com.manchui.domain.user.entity.User;
 import com.manchui.global.entity.Timestamped;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

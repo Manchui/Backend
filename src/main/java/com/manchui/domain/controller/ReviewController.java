@@ -1,6 +1,6 @@
 package com.manchui.domain.controller;
 
-import com.manchui.domain.dto.CustomUserDetails;
+import com.manchui.domain.auth.dto.CustomUserDetails;
 import com.manchui.domain.dto.review.ReviewCreateRequest;
 import com.manchui.domain.dto.review.ReviewCreateResponse;
 import com.manchui.domain.dto.review.ReviewDetailPagingResponse;

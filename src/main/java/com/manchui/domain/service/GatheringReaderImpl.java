@@ -1,9 +1,9 @@
 package com.manchui.domain.service;
 
-import com.manchui.domain.dto.UserInfo;
+import com.manchui.domain.user.dto.UserInfo;
 import com.manchui.domain.entity.Attendance;
 import com.manchui.domain.entity.Gathering;
-import com.manchui.domain.entity.User;
+import com.manchui.domain.user.entity.User;
 import com.manchui.domain.repository.AttendanceRepository;
 import com.manchui.domain.repository.GatheringRepository;
 import com.manchui.global.exception.CustomException;
