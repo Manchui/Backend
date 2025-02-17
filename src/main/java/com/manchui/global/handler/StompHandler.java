@@ -1,9 +1,9 @@
 package com.manchui.global.handler;
 
-import com.manchui.domain.dto.CustomUserDetails;
-import com.manchui.domain.entity.User;
-import com.manchui.domain.repository.UserRepository;
-import com.manchui.domain.service.RedisRefreshTokenService;
+import com.manchui.domain.auth.dto.CustomUserDetails;
+import com.manchui.domain.user.entity.User;
+import com.manchui.domain.user.repository.UserRepository;
+import com.manchui.domain.auth.service.RedisRefreshTokenService;
 import com.manchui.global.exception.CustomException;
 import com.manchui.global.exception.ErrorCode;
 import com.manchui.global.jwt.JWTUtil;

@@ -1,8 +1,8 @@
 package com.manchui.global.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.manchui.domain.dto.LoginDTO;
-import com.manchui.domain.service.RedisRefreshTokenService;
+import com.manchui.domain.auth.dto.LoginDTO;
+import com.manchui.domain.auth.service.RedisRefreshTokenService;
 import com.manchui.global.exception.ErrorCode;
 import com.manchui.global.response.ErrorResponse;
 import jakarta.servlet.FilterChain;
@@ -13,7 +13,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validator;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,7 +20,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.stereotype.Component;
 import org.springframework.util.StreamUtils;
 
 import java.io.IOException;
