@@ -95,7 +95,7 @@ TODO : 위키로 정리 예정
 <br/>
 
 ### 🎨 서비스 아키텍처
-<img src="https://github.com/user-attachments/assets/1bd8bf9a-d456-43a3-b2ba-8c3ea1393434" width="700" />
+<img src="https://github.com/user-attachments/assets/b5a61b29-4793-4104-9f1d-363b8ac25e13" width="700" />
 
 
 
