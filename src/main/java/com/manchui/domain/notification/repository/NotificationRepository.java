@@ -1,6 +1,6 @@
 package com.manchui.domain.notification.repository;
 
-import com.manchui.domain.entity.User;
+import com.manchui.domain.user.entity.User;
 import com.manchui.domain.notification.entity.Notification;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

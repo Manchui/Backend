@@ -1,6 +1,6 @@
 package com.manchui.domain.notification.entity;
 
-import com.manchui.domain.entity.User;
+import com.manchui.domain.user.entity.User;
 import com.manchui.domain.notification.dto.NotificationResponse;
 import com.manchui.global.entity.Timestamped;
 import jakarta.persistence.*;

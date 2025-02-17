@@ -1,0 +1,100 @@
+package com.manchui.domain.user.controller;
+
+import com.manchui.domain.auth.dto.CustomUserDetails;
+import com.manchui.domain.user.entity.User;
+import com.manchui.domain.user.service.UserService;
+import com.manchui.domain.user.dto.*;
+import com.manchui.global.response.SuccessResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
+
+@Tag(name = "Users")
+@RestController
+@RequiredArgsConstructor
+public class UserController {
+
+    private final UserService userService;
+
+    @GetMapping("/api/auths/user")
+    public ResponseEntity<SuccessResponse<UserInfoResponse>> userInfo(@AuthenticationPrincipal CustomUserDetails userDetails) {
+
+        String userEmail = userDetails.getUsername();
+        UserInfoResponse userInfo = userService.getUserInfo(userEmail);
+
+        return ResponseEntity.ok().body(SuccessResponse.successWithData(userInfo));
+    }
+
+    @PutMapping("/api/auths/user")
+    public ResponseEntity<SuccessResponse<UserEditInfoResponse>> editUserInfo(@AuthenticationPrincipal CustomUserDetails userDetails,
+                                                                              @ModelAttribute @Valid UserEditInfoRequest userEditInfoRequest) {
+
+        String userEmail = userDetails.getUsername();
+        userService.checkName(userEditInfoRequest.getName(), userEmail);
+        UUID userId = userService.editUserInfo(userEmail, userEditInfoRequest);
+        User user = userService.findByUserId(userId);
+        UserEditInfoResponse response = UserEditInfoResponse.builder()
+                .id(userId)
+                .name(user.getName())
+                .profileImagePath(user.getProfileImagePath())
+                .build();
+
+        return ResponseEntity.ok().body(SuccessResponse.successWithData(response));
+    }
+
+    @DeleteMapping("/api/auth/user")
+    public ResponseEntity<SuccessResponse<String>> deleteUser(@AuthenticationPrincipal CustomUserDetails userDetails) {
+
+        userService.deleteUser(userDetails);
+        return ResponseEntity.ok().body(SuccessResponse.successWithNoData("회원 탈퇴 성공"));
+    }
+
+    @GetMapping("/api/users/gatherings")
+    public ResponseEntity<SuccessResponse<UserWrittenGatheringsResponse>> getMyGatheringList(
+            @AuthenticationPrincipal CustomUserDetails userDetails,
+            @PageableDefault(size = 10, sort = "gatheringDate", direction = Sort.Direction.DESC) Pageable pageable) {
+
+        UserWrittenGatheringsResponse response = userService.getWrittenGatheringList(userDetails.getUsername(), pageable);
+
+        return ResponseEntity.ok(SuccessResponse.successWithData(response));
+    }
+
+    @GetMapping("/api/users/gatherings/attendance")
+    public ResponseEntity<SuccessResponse<UserParticipatedGatheringResponse>> getMyParticipatedGatheringList(
+            @AuthenticationPrincipal CustomUserDetails customUserDetails,
+            @PageableDefault(sort = "gatheringDate", direction = Sort.Direction.DESC) Pageable pageable) {
+
+        String userEmail = customUserDetails.getUsername();
+        UserParticipatedGatheringResponse response = userService.getParticipatedGatheringList(userEmail, pageable);
+        return ResponseEntity.ok(SuccessResponse.successWithData(response));
+    }
+
+    @GetMapping("/api/users/reviews")
+    public ResponseEntity<SuccessResponse<UserWrittenReviewsResponse>> getReviewableGatherings
+            (@AuthenticationPrincipal CustomUserDetails customUserDetails,
+             @PageableDefault(sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable) {
+
+        UserWrittenReviewsResponse response = userService.getWrittenReviews(customUserDetails.getUsername(), pageable);
+
+        return ResponseEntity.ok(SuccessResponse.successWithData(response));
+    }
+
+    @GetMapping("/api/users/reviewable/list")
+    public ResponseEntity<SuccessResponse<UserReviewableGatheringsResponse>> getWritableGatherings(
+            @AuthenticationPrincipal CustomUserDetails customUserDetails,
+            @PageableDefault(sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable) {
+
+        UserReviewableGatheringsResponse response = userService.getReviewableGatherings(customUserDetails.getUsername(), pageable);
+
+        return ResponseEntity.ok(SuccessResponse.successWithData(response));
+    }
+
+}

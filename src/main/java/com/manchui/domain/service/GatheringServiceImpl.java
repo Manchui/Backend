@@ -1,8 +1,13 @@
 package com.manchui.domain.service;
 
-import com.manchui.domain.dto.CustomUserDetails;
-import com.manchui.domain.dto.UserInfo;
-import com.manchui.domain.dto.chat.ChatMessageRequest;
+import com.manchui.domain.chat.entity.mysql.ChatRoom;
+import com.manchui.domain.chat.entity.mysql.ChatRoomUser;
+import com.manchui.domain.chat.repository.ChatRoomRepository;
+import com.manchui.domain.chat.repository.ChatRoomUserRepository;
+import com.manchui.domain.chat.service.ChatMessageService;
+import com.manchui.domain.auth.dto.CustomUserDetails;
+import com.manchui.domain.user.dto.UserInfo;
+import com.manchui.domain.chat.dto.ChatMessageRequest;
 import com.manchui.domain.dto.gathering.*;
 import com.manchui.domain.dto.review.ReviewDetailPagingResponse;
 import com.manchui.domain.dto.review.ReviewInfo;
@@ -11,6 +16,8 @@ import com.manchui.domain.entity.*;
 import com.manchui.domain.notification.entity.NotificationType;
 import com.manchui.domain.notification.service.NotificationServiceImpl;
 import com.manchui.domain.repository.*;
+import com.manchui.domain.user.entity.User;
+import com.manchui.domain.user.service.UserService;
 import com.manchui.global.exception.CustomException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -123,7 +130,7 @@ public class GatheringServiceImpl implements GatheringService {
             ChatRoom chatRoom = new ChatRoom(UUID.randomUUID().toString());
             String roomId = chatRoomRepository.save(chatRoom).getRoomId();
             chatRoomUserRepository.save(new ChatRoomUser(user, chatRoom));
-            chatMessageService.chatRoomOpenMessageSave(new ChatMessageRequest(user.getName(), user.getName() + "님이 채팅방을 개설하였습니다."), roomId).block();
+            chatMessageService.chatRoomOpenMessageSave(new ChatMessageRequest(user.getName(), user.getName() + "님이 입장하셨습니다."), roomId).block();
 
             Gathering gathering = gatheringStore.saveGathering(createRequest, user, gatheringDate, dueDate, chatRoom);
             imageService.uploadGatheringImage(createRequest.getGatheringImage(), gathering.getId(), false);

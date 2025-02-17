@@ -1,6 +1,6 @@
 package com.manchui.domain.notification.service;
 
-import com.manchui.domain.entity.User;
+import com.manchui.domain.user.entity.User;
 import com.manchui.domain.notification.dto.NotificationCursorPagingResponse;
 import com.manchui.domain.notification.entity.NotificationType;
 import org.springframework.stereotype.Service;

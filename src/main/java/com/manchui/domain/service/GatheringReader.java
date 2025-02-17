@@ -1,8 +1,8 @@
 package com.manchui.domain.service;
 
-import com.manchui.domain.dto.UserInfo;
+import com.manchui.domain.user.dto.UserInfo;
 import com.manchui.domain.entity.Gathering;
-import com.manchui.domain.entity.User;
+import com.manchui.domain.user.entity.User;
 
 import java.util.List;
 import java.util.Optional;

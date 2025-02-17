@@ -21,7 +21,7 @@ import static com.manchui.domain.entity.QAttendance.attendance;
 import static com.manchui.domain.entity.QGathering.gathering;
 import static com.manchui.domain.entity.QHeart.heart;
 import static com.manchui.domain.entity.QImage.image;
-import static com.manchui.domain.entity.QUser.user;
+import static com.manchui.domain.user.entity.QUser.user;
 import static com.querydsl.jpa.JPAExpressions.select;
 
 @Slf4j

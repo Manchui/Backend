@@ -1,6 +1,6 @@
 package com.manchui.domain.notification.controller;
 
-import com.manchui.domain.dto.CustomUserDetails;
+import com.manchui.domain.auth.dto.CustomUserDetails;
 import com.manchui.domain.notification.dto.NotificationCursorPagingResponse;
 import com.manchui.domain.notification.service.NotificationService;
 import com.manchui.global.response.SuccessResponse;

@@ -1,7 +1,7 @@
 package com.manchui.global.config;
 
 import com.manchui.domain.notification.repository.EmitterRepository;
-import com.manchui.domain.service.RedisRefreshTokenService;
+import com.manchui.domain.auth.service.RedisRefreshTokenService;
 import com.manchui.global.jwt.CustomLogoutFilter;
 import com.manchui.global.jwt.JWTFilter;
 import com.manchui.global.jwt.JWTUtil;

@@ -1,8 +1,8 @@
 package com.manchui.domain.repository;
 
-import com.manchui.domain.entity.ChatRoom;
+import com.manchui.domain.chat.entity.mysql.ChatRoom;
 import com.manchui.domain.entity.Gathering;
-import com.manchui.domain.entity.User;
+import com.manchui.domain.user.entity.User;
 import com.manchui.domain.repository.querydsl.GatheringCursorQueryDsl;
 import com.manchui.domain.repository.querydsl.GatheringQueryDsl;
 import org.springframework.data.domain.Page;

@@ -2,7 +2,7 @@ package com.manchui.global.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.manchui.domain.notification.repository.EmitterRepository;
-import com.manchui.domain.service.RedisRefreshTokenService;
+import com.manchui.domain.auth.service.RedisRefreshTokenService;
 import com.manchui.global.exception.CustomException;
 import com.manchui.global.exception.ErrorCode;
 import com.manchui.global.response.ErrorResponse;
