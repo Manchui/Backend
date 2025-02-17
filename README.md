@@ -1,4 +1,4 @@
-# Backend
+![image](https://github.com/user-attachments/assets/e8775f02-f8e6-4431-86b3-72c2b0ca3fdc)![image](https://github.com/user-attachments/assets/58f78453-c9a3-4786-af40-47f5bd639555)# Backend
 
 > ## 📝 목차
 > 1. [서비스 소개](#-서비스-소개)
@@ -95,9 +95,7 @@ TODO : 위키로 정리 예정
 <br/>
 
 ### 🎨 서비스 아키텍처
-<img src="https://github.com/user-attachments/assets/b5a61b29-4793-4104-9f1d-363b8ac25e13" width="700" />
-
-
+<img src="https://github.com/user-attachments/assets/dd75b199-24b3-4ace-adfa-3292b13b4801" width="700" />
 
 <br/>
 
