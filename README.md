@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/e8775f02-f8e6-4431-86b3-72c2b0ca3fdc)![image](https://github.com/user-attachments/assets/58f78453-c9a3-4786-af40-47f5bd639555)# Backend
+# Backend
 
 > ## 📝 목차
 > 1. [서비스 소개](#-서비스-소개)
