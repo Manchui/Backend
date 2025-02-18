@@ -1,6 +1,7 @@
 package com.manchui.domain.repository.querydsl;
 
 import com.manchui.domain.dto.gathering.GatheringListResponse;
+import com.manchui.domain.entity.Category;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQuery;
@@ -96,8 +97,9 @@ public class GatheringQueryDslImpl implements GatheringQueryDsl {
             queryBuilder.where(gathering.gatheringDate.between(start.atStartOfDay(), end.atTime(23, 59, 59)));
         }
 
-        if (StringUtils.hasText(category)) {
-            queryBuilder.where(gathering.category.eq(category));
+        if (StringUtils.hasText(category) && !category.equalsIgnoreCase("all")) {
+            String koreanCategory = Category.toKorean(category);
+            queryBuilder.where(gathering.category.eq(koreanCategory));
         }
 
         // 정렬 조건 적용
