@@ -1,8 +1,8 @@
-package com.manchui.domain.service;
+package com.manchui.domain.gathering.service;
 
-import com.manchui.domain.dto.gathering.GatheringCreateRequest;
+import com.manchui.domain.gathering.dto.GatheringCreateRequest;
 import com.manchui.domain.chat.entity.mysql.ChatRoom;
-import com.manchui.domain.entity.Gathering;
+import com.manchui.domain.gathering.entity.Gathering;
 import com.manchui.domain.user.entity.User;
 
 import java.time.LocalDateTime;

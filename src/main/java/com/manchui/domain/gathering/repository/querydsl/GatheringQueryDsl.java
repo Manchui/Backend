@@ -1,6 +1,6 @@
-package com.manchui.domain.repository.querydsl;
+package com.manchui.domain.gathering.repository.querydsl;
 
-import com.manchui.domain.dto.gathering.GatheringListResponse;
+import com.manchui.domain.gathering.dto.GatheringListResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

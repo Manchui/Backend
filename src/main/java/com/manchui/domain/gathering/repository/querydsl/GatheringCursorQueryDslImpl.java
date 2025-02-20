@@ -1,7 +1,8 @@
-package com.manchui.domain.repository.querydsl;
+package com.manchui.domain.gathering.repository.querydsl;
 
-import com.manchui.domain.dto.gathering.GatheringCursorPagingResponse;
-import com.manchui.domain.dto.gathering.GatheringListResponse;
+import com.manchui.domain.gathering.dto.GatheringCursorPagingResponse;
+import com.manchui.domain.gathering.dto.GatheringListResponse;
+import com.manchui.domain.gathering.entity.Gathering;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.ConstructorExpression;
 import com.querydsl.core.types.Projections;
@@ -17,10 +18,10 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-import static com.manchui.domain.entity.QAttendance.attendance;
-import static com.manchui.domain.entity.QGathering.gathering;
-import static com.manchui.domain.entity.QHeart.heart;
-import static com.manchui.domain.entity.QImage.image;
+import static com.manchui.domain.attendance.entity.QAttendance.attendance;
+import static com.manchui.domain.gathering.entity.QGathering.gathering;
+import static com.manchui.domain.heart.entity.QHeart.heart;
+import static com.manchui.domain.image.entity.QImage.image;
 import static com.manchui.domain.user.entity.QUser.user;
 import static com.querydsl.jpa.JPAExpressions.select;
 
@@ -69,10 +70,28 @@ public class GatheringCursorQueryDslImpl implements GatheringCursorQueryDsl {
             ));
         }
 
-        // 1. 목록 조회 쿼리 (커서 조건 포함)
+        // 1. 목록 조회 쿼리 (커서 조건 포함, 마감임박순 조회 시 조건 추가)
         BooleanBuilder listConditions = new BooleanBuilder(baseConditions);
         if (cursor != null) {
-            listConditions.and(gathering.id.lt(cursor));
+            Gathering targetGathering = queryFactory
+                    .selectFrom(gathering)
+                    .where(gathering.id.eq(cursor))
+                    .fetchOne();
+            if (targetGathering != null) {
+                LocalDateTime cursorCloseDate = targetGathering.getDueDate();
+
+                if (sortField.equals("closeDate")) {
+                    listConditions.and(
+                            gathering.dueDate.gt(cursorCloseDate) // 현재 커서 이후의 마감일 데이터
+                                    .or(
+                                            gathering.dueDate.eq(cursorCloseDate)
+                                                    .and(gathering.id.gt(cursor)) // 마감일자가 같으면 gatheringId 기준 정렬
+                                    )
+                    );
+                } else {
+                    listConditions.and(gathering.id.lt(cursor));
+                }
+            }
         }
 
         List<GatheringListResponse> gatheringList = queryFactory

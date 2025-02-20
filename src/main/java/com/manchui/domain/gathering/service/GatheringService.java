@@ -1,7 +1,7 @@
-package com.manchui.domain.service;
+package com.manchui.domain.gathering.service;
 
 import com.manchui.domain.auth.dto.CustomUserDetails;
-import com.manchui.domain.dto.gathering.*;
+import com.manchui.domain.gathering.dto.*;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 

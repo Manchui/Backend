@@ -1,12 +1,12 @@
-package com.manchui.domain.service;
+package com.manchui.domain.gathering.service;
 
-import com.manchui.domain.dto.gathering.GatheringCreateRequest;
-import com.manchui.domain.entity.Attendance;
+import com.manchui.domain.attendance.entity.Attendance;
+import com.manchui.domain.attendance.repository.AttendanceRepository;
+import com.manchui.domain.gathering.dto.GatheringCreateRequest;
 import com.manchui.domain.chat.entity.mysql.ChatRoom;
-import com.manchui.domain.entity.Gathering;
+import com.manchui.domain.gathering.entity.Gathering;
+import com.manchui.domain.gathering.repository.GatheringRepository;
 import com.manchui.domain.user.entity.User;
-import com.manchui.domain.repository.AttendanceRepository;
-import com.manchui.domain.repository.GatheringRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

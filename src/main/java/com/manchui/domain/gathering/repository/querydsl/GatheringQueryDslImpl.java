@@ -1,6 +1,6 @@
-package com.manchui.domain.repository.querydsl;
+package com.manchui.domain.gathering.repository.querydsl;
 
-import com.manchui.domain.dto.gathering.GatheringListResponse;
+import com.manchui.domain.gathering.dto.GatheringListResponse;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQuery;
@@ -17,10 +17,10 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-import static com.manchui.domain.entity.QAttendance.attendance;
-import static com.manchui.domain.entity.QGathering.gathering;
-import static com.manchui.domain.entity.QHeart.heart;
-import static com.manchui.domain.entity.QImage.image;
+import static com.manchui.domain.attendance.entity.QAttendance.attendance;
+import static com.manchui.domain.gathering.entity.QGathering.gathering;
+import static com.manchui.domain.heart.entity.QHeart.heart;
+import static com.manchui.domain.image.entity.QImage.image;
 import static com.manchui.domain.user.entity.QUser.user;
 import static com.querydsl.jpa.JPAExpressions.select;
 

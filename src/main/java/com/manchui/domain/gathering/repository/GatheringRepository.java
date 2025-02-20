@@ -1,10 +1,10 @@
-package com.manchui.domain.repository;
+package com.manchui.domain.gathering.repository;
 
 import com.manchui.domain.chat.entity.mysql.ChatRoom;
-import com.manchui.domain.entity.Gathering;
+import com.manchui.domain.gathering.entity.Gathering;
 import com.manchui.domain.user.entity.User;
-import com.manchui.domain.repository.querydsl.GatheringCursorQueryDsl;
-import com.manchui.domain.repository.querydsl.GatheringQueryDsl;
+import com.manchui.domain.gathering.repository.querydsl.GatheringCursorQueryDsl;
+import com.manchui.domain.gathering.repository.querydsl.GatheringQueryDsl;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

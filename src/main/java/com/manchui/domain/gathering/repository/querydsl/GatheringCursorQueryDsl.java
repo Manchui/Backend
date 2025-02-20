@@ -1,6 +1,6 @@
-package com.manchui.domain.repository.querydsl;
+package com.manchui.domain.gathering.repository.querydsl;
 
-import com.manchui.domain.dto.gathering.GatheringCursorPagingResponse;
+import com.manchui.domain.gathering.dto.GatheringCursorPagingResponse;
 
 public interface GatheringCursorQueryDsl {
 

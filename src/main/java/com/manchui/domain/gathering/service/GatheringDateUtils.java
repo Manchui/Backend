@@ -1,4 +1,4 @@
-package com.manchui.domain.service;
+package com.manchui.domain.gathering.service;
 
 import com.manchui.global.exception.CustomException;
 import jakarta.annotation.PostConstruct;

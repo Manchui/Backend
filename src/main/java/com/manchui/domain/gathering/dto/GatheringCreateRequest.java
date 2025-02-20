@@ -1,7 +1,7 @@
-package com.manchui.domain.dto.gathering;
+package com.manchui.domain.gathering.dto;
 
 import com.manchui.domain.chat.entity.mysql.ChatRoom;
-import com.manchui.domain.entity.Gathering;
+import com.manchui.domain.gathering.entity.Gathering;
 import com.manchui.domain.user.entity.User;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;

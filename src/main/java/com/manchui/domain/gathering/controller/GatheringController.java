@@ -1,8 +1,8 @@
-package com.manchui.domain.controller;
+package com.manchui.domain.gathering.controller;
 
 import com.manchui.domain.auth.dto.CustomUserDetails;
-import com.manchui.domain.dto.gathering.*;
-import com.manchui.domain.service.GatheringService;
+import com.manchui.domain.gathering.dto.*;
+import com.manchui.domain.gathering.service.GatheringService;
 import com.manchui.global.response.SuccessResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;

@@ -1,11 +1,11 @@
-package com.manchui.domain.service;
+package com.manchui.domain.gathering.service;
 
+import com.manchui.domain.attendance.entity.Attendance;
+import com.manchui.domain.attendance.repository.AttendanceRepository;
+import com.manchui.domain.gathering.entity.Gathering;
+import com.manchui.domain.gathering.repository.GatheringRepository;
 import com.manchui.domain.user.dto.UserInfo;
-import com.manchui.domain.entity.Attendance;
-import com.manchui.domain.entity.Gathering;
 import com.manchui.domain.user.entity.User;
-import com.manchui.domain.repository.AttendanceRepository;
-import com.manchui.domain.repository.GatheringRepository;
 import com.manchui.global.exception.CustomException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -100,6 +100,5 @@ public class GatheringReaderImpl implements GatheringReader {
                 .filter(gathering -> gathering.getGatheringDate().isBefore(LocalDateTime.now()))
                 .toList();
     }
-
 
 }
