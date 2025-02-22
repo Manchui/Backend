@@ -1,5 +1,6 @@
-package com.manchui.domain.entity;
+package com.manchui.domain.attendance.entity;
 
+import com.manchui.domain.gathering.entity.Gathering;
 import com.manchui.domain.user.entity.User;
 import com.manchui.global.entity.Timestamped;
 import jakarta.persistence.*;

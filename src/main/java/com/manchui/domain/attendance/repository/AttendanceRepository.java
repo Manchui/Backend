@@ -1,7 +1,7 @@
-package com.manchui.domain.repository;
+package com.manchui.domain.attendance.repository;
 
-import com.manchui.domain.entity.Attendance;
-import com.manchui.domain.entity.Gathering;
+import com.manchui.domain.attendance.entity.Attendance;
+import com.manchui.domain.gathering.entity.Gathering;
 import com.manchui.domain.user.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
