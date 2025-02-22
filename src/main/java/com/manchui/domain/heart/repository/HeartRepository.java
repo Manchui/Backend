@@ -1,7 +1,7 @@
-package com.manchui.domain.repository;
+package com.manchui.domain.heart.repository;
 
-import com.manchui.domain.entity.Gathering;
-import com.manchui.domain.entity.Heart;
+import com.manchui.domain.gathering.entity.Gathering;
+import com.manchui.domain.heart.entity.Heart;
 import com.manchui.domain.user.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -1,5 +1,6 @@
-package com.manchui.domain.entity;
+package com.manchui.domain.heart.entity;
 
+import com.manchui.domain.gathering.entity.Gathering;
 import com.manchui.domain.user.entity.User;
 import com.manchui.global.entity.Timestamped;
 import jakarta.persistence.*;
@@ -14,7 +15,6 @@ import org.hibernate.annotations.Comment;
 @AllArgsConstructor
 @Table(name = "heart")
 public class Heart extends Timestamped {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Comment("좋아요 id")
