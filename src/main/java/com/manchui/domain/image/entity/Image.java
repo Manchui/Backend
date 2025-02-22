@@ -1,4 +1,4 @@
-package com.manchui.domain.entity;
+package com.manchui.domain.image.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

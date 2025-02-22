@@ -1,7 +1,7 @@
-package com.manchui.domain.service;
+package com.manchui.domain.image.service;
 
-import com.manchui.domain.entity.Image;
-import com.manchui.domain.repository.ImageRepository;
+import com.manchui.domain.image.entity.Image;
+import com.manchui.domain.image.repository.ImageRepository;
 import com.manchui.global.exception.CustomException;
 import com.manchui.global.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;

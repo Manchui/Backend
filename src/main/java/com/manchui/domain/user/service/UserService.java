@@ -1,9 +1,15 @@
 package com.manchui.domain.user.service;
 
+import com.manchui.domain.attendance.entity.Attendance;
+import com.manchui.domain.attendance.repository.AttendanceRepository;
 import com.manchui.domain.auth.dto.CustomUserDetails;
-import com.manchui.domain.entity.*;
-import com.manchui.domain.repository.*;
-import com.manchui.domain.service.ImageServiceImpl;
+import com.manchui.domain.gathering.entity.Gathering;
+import com.manchui.domain.gathering.repository.GatheringRepository;
+import com.manchui.domain.image.entity.Image;
+import com.manchui.domain.image.repository.ImageRepository;
+import com.manchui.domain.review.entity.Review;
+import com.manchui.domain.image.service.ImageServiceImpl;
+import com.manchui.domain.review.repository.ReviewRepository;
 import com.manchui.domain.user.dto.*;
 import com.manchui.domain.user.entity.User;
 import com.manchui.domain.user.repository.UserRepository;
