@@ -1,9 +1,9 @@
-package com.manchui.domain.repository;
+package com.manchui.domain.review.repository;
 
-import com.manchui.domain.entity.Gathering;
-import com.manchui.domain.entity.Review;
+import com.manchui.domain.gathering.entity.Gathering;
+import com.manchui.domain.review.entity.Review;
+import com.manchui.domain.review.repository.querydsl.ReviewQueryDsl;
 import com.manchui.domain.user.entity.User;
-import com.manchui.domain.repository.querydsl.ReviewQueryDsl;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

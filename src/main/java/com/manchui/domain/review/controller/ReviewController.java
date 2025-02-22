@@ -1,11 +1,11 @@
-package com.manchui.domain.controller;
+package com.manchui.domain.review.controller;
 
 import com.manchui.domain.auth.dto.CustomUserDetails;
-import com.manchui.domain.dto.review.ReviewCreateRequest;
-import com.manchui.domain.dto.review.ReviewCreateResponse;
-import com.manchui.domain.dto.review.ReviewDetailPagingResponse;
-import com.manchui.domain.dto.review.ReviewScoreResponse;
-import com.manchui.domain.service.ReviewService;
+import com.manchui.domain.review.dto.ReviewCreateRequest;
+import com.manchui.domain.review.dto.ReviewCreateResponse;
+import com.manchui.domain.review.dto.ReviewDetailPagingResponse;
+import com.manchui.domain.review.dto.ReviewScoreResponse;
+import com.manchui.domain.review.service.ReviewService;
 import com.manchui.global.response.SuccessResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;

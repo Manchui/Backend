@@ -1,8 +1,8 @@
-package com.manchui.domain.repository.querydsl;
+package com.manchui.domain.review.repository.querydsl;
 
-import com.manchui.domain.dto.review.ReviewDetailInfo;
-import com.manchui.domain.dto.review.ReviewInfo;
-import com.manchui.domain.dto.review.ReviewScoreInfo;
+import com.manchui.domain.review.dto.ReviewDetailInfo;
+import com.manchui.domain.review.dto.ReviewInfo;
+import com.manchui.domain.review.dto.ReviewScoreInfo;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.Expressions;
@@ -18,9 +18,10 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-import static com.manchui.domain.entity.QGathering.gathering;
-import static com.manchui.domain.entity.QImage.image;
-import static com.manchui.domain.entity.QReview.review;
+
+import static com.manchui.domain.gathering.entity.QGathering.gathering;
+import static com.manchui.domain.image.entity.QImage.image;
+import static com.manchui.domain.review.entity.QReview.review;
 import static com.manchui.domain.user.entity.QUser.user;
 import static com.querydsl.jpa.JPAExpressions.select;
 

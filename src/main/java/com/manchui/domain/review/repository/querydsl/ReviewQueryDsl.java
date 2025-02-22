@@ -1,8 +1,8 @@
-package com.manchui.domain.repository.querydsl;
+package com.manchui.domain.review.repository.querydsl;
 
-import com.manchui.domain.dto.review.ReviewDetailInfo;
-import com.manchui.domain.dto.review.ReviewInfo;
-import com.manchui.domain.dto.review.ReviewScoreInfo;
+import com.manchui.domain.review.dto.ReviewDetailInfo;
+import com.manchui.domain.review.dto.ReviewInfo;
+import com.manchui.domain.review.dto.ReviewScoreInfo;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

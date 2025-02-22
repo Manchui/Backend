@@ -1,12 +1,13 @@
-package com.manchui.domain.service;
+package com.manchui.domain.review.service;
 
-import com.manchui.domain.dto.review.*;
-import com.manchui.domain.entity.Attendance;
-import com.manchui.domain.entity.Gathering;
-import com.manchui.domain.entity.Review;
+import com.manchui.domain.attendance.entity.Attendance;
+import com.manchui.domain.gathering.entity.Gathering;
+import com.manchui.domain.gathering.service.GatheringReader;
+import com.manchui.domain.review.dto.*;
+import com.manchui.domain.review.entity.Review;
+import com.manchui.domain.review.repository.ReviewRepository;
 import com.manchui.domain.user.entity.User;
-import com.manchui.domain.repository.AttendanceRepository;
-import com.manchui.domain.repository.ReviewRepository;
+import com.manchui.domain.attendance.repository.AttendanceRepository;
 import com.manchui.domain.user.service.UserService;
 import com.manchui.global.exception.CustomException;
 import jakarta.transaction.Transactional;

@@ -1,7 +1,8 @@
-package com.manchui.domain.entity;
+package com.manchui.domain.review.entity;
 
-import com.manchui.domain.dto.review.ReviewCreateRequest;
-import com.manchui.domain.dto.review.ReviewCreateResponse;
+import com.manchui.domain.gathering.entity.Gathering;
+import com.manchui.domain.review.dto.ReviewCreateRequest;
+import com.manchui.domain.review.dto.ReviewCreateResponse;
 import com.manchui.domain.user.entity.User;
 import com.manchui.global.entity.Timestamped;
 import jakarta.persistence.*;

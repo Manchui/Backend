@@ -1,4 +1,4 @@
-package com.manchui.domain.dto.review;
+package com.manchui.domain.review.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
