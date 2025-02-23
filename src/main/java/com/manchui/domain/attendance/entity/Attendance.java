@@ -1,0 +1,36 @@
+package com.manchui.domain.attendance.entity;
+
+import com.manchui.domain.gathering.entity.Gathering;
+import com.manchui.domain.user.entity.User;
+import com.manchui.global.entity.Timestamped;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Comment;
+
+@Entity
+@Table(name = "attendance")
+@Builder
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+public class Attendance extends Timestamped {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Comment("참석 id")
+    private Long id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "gathering_id", nullable = false)
+    @Comment("모임 id")
+    private Gathering gathering;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    @Comment("회원 id")
+    private User user;
+
+}

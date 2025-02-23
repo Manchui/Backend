@@ -5,13 +5,15 @@ import com.manchui.domain.chat.entity.mysql.ChatRoomUser;
 import com.manchui.domain.chat.repository.ChatRoomRepository;
 import com.manchui.domain.chat.repository.ChatRoomUserRepository;
 import com.manchui.domain.auth.dto.CustomUserDetails;
+import com.manchui.domain.gathering.entity.Gathering;
+import com.manchui.domain.gathering.repository.GatheringRepository;
+import com.manchui.domain.image.entity.Image;
+import com.manchui.domain.image.repository.ImageRepository;
 import com.manchui.domain.user.dto.UserInfo;
 import com.manchui.domain.chat.dto.ChatRoomListDetail;
 import com.manchui.domain.chat.dto.ChatRoomListResponse;
 import com.manchui.domain.chat.dto.ChatRoomUserListResponse;
-import com.manchui.domain.entity.*;
 import com.manchui.domain.chat.entity.mongodb.ChatMessage;
-import com.manchui.domain.repository.*;
 import com.manchui.domain.chat.repository.mongodb.ChatMessageRepository;
 import com.manchui.domain.user.entity.User;
 import com.manchui.domain.user.repository.UserRepository;
@@ -80,7 +82,7 @@ public class ChatRoomService {
 
     // 채팅방에 속한 사용자 softDelete
     @Transactional
-    public void chatRoomQuite(String email, String roomId){
+    public void chatRoomQuite(String email, String roomId) {
 
         User user = userRepository.findByEmail(email);
         ChatRoom chatRoom = chatRoomRepository.findByRoomId(roomId);
@@ -89,4 +91,5 @@ public class ChatRoomService {
         );
         chatRoomUser.softDelete();
     }
+
 }

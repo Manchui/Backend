@@ -2,10 +2,10 @@ package com.manchui.domain.auth.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.manchui.domain.entity.Image;
-import com.manchui.domain.service.ImageServiceImpl;
+import com.manchui.domain.image.entity.Image;
+import com.manchui.domain.image.repository.ImageRepository;
+import com.manchui.domain.image.service.ImageServiceImpl;
 import com.manchui.domain.user.entity.User;
-import com.manchui.domain.repository.ImageRepository;
 import com.manchui.domain.user.repository.UserRepository;
 import com.manchui.global.exception.CustomException;
 import com.manchui.global.exception.ErrorCode;
