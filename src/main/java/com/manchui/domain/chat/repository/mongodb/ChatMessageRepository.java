@@ -13,7 +13,7 @@ public interface ChatMessageRepository extends ReactiveMongoRepository<ChatMessa
 
     Flux<ChatMessage> findByRoomIdAndCreatedAtGreaterThanEqualOrderByCreatedAtDesc(String roomId, LocalDateTime createdAt);
 
-    @Query(value = "{ 'roomId': ?0, '_id': { $lt: ?1 }, 'createdAt': { $lt: ?2 } }", sort = "{ '_id': -1 }")
+    @Query(value = "{ 'roomId': ?0, '_id': { $lt: ?1 }, 'createdAt': { $gte: ?2 } }", sort = "{ '_id': -1 }")
     Flux<ChatMessage> findByRoomIdAndIdLessThanAndCreatedAtGreaterThanEqualOrderByIdDesc(String roomId, ObjectId lastMessageId, LocalDateTime createdAt);
 
     Mono<ChatMessage> findFirstByRoomIdOrderByCreatedAtDesc(String roomId);
